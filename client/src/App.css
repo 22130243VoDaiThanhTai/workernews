@@ -1,0 +1,106 @@
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: #f4f4f4;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.app-header h1 { color: #d32f2f; margin-bottom: 15px; }
+
+
+.category-list {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cat-btn {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cat-btn:hover { background: #eee; }
+
+.cat-btn.active {
+  background: #d32f2f;
+  color: white;
+  border-color: #d32f2f;
+}
+
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.news-card {
+  display: flex;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  gap: 15px;
+}
+
+.news-thumb {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.news-info { flex: 1; }
+
+.news-title {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.news-title a {
+  text-decoration: none;
+  color: #333;
+}
+
+.news-title a:hover { color: #d32f2f; }
+
+.news-date {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.news-desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.loading-text { text-align: center; margin-top: 20px; color: #666; }
+
+/* Responsive cho điện thoại */
+@media (max-width: 600px) {
+  .news-card { flex-direction: column; }
+  .news-thumb { width: 100%; height: 180px; }
+}

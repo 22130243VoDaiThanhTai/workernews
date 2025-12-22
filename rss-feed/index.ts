@@ -41,11 +41,19 @@ app.post('/', async (req: Request<{}, {}, RequestBody>, res: Response) => {
         const dataPage = req.body.datapage;
         let rssSlug = "";
         
-        // CẬP NHẬT SLUG THEO ĐÚNG DANH SÁCH BẠN GỬI
         switch (dataPage) {
             case "home": rssSlug = "home"; break;        
             case "tin-moi": rssSlug = "home"; break; 
+            
+            // --- CÁC MỤC TRONG THỜI SỰ ---
             case "thoi-su": rssSlug = "thoi-su"; break;
+            case "chinh-tri": rssSlug = "thoi-su/chinh-tri"; break;
+            case "xa-hoi": rssSlug = "thoi-su/xa-hoi"; break;
+            case "do-thi": rssSlug = "thoi-su/do-thi"; break;
+            case "chuyen-thuong-ngay": rssSlug = "thoi-su/chuyen-thuong-ngay-o-phuong-xa"; break;
+            case "bien-dao": rssSlug = "bien-dao"; break;
+
+            // --- CÁC MỤC KHÁC ---
             case "quoc-te": rssSlug = "quoc-te"; break;
             case "lao-dong": rssSlug = "lao-dong"; break;
             case "ban-doc": rssSlug = "ban-doc"; break;
@@ -58,14 +66,15 @@ app.post('/', async (req: Request<{}, {}, RequestBody>, res: Response) => {
             case "giai-tri": rssSlug = "giai-tri"; break;
             case "the-thao": rssSlug = "the-thao"; break;
             case "ai-365": rssSlug = "ai-365"; break;
-            case "phu-nu": rssSlug = "chuyen-trang-phu-nu"; break; // Đã sửa
+            case "phu-nu": rssSlug = "chuyen-trang-phu-nu"; break;
             case "gia-dinh": rssSlug = "gia-dinh"; break;
             case "dia-oc": rssSlug = "dia-oc"; break;
-            default: rssSlug = "home"; // Mặc định về home
+            
+            default: rssSlug = "home"; 
         }
 
         const urlFeed = BASE_RSS_URL + rssSlug + ".rss";
-        console.log(`Backend đang lấy: ${urlFeed}`); // Log để kiểm tra
+        console.log(`Backend đang lấy: ${urlFeed} (Page: ${dataPage})`);
 
         try {
             const data = await parse(urlFeed);

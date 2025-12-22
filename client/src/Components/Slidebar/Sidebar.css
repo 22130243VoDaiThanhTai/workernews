@@ -1,0 +1,99 @@
+/* Container chung */
+.sidebar-container {
+    width: 100%;
+}
+
+.sidebar-widget {
+    margin-bottom: 30px;
+    border: 1px solid #eee; /* Khung viền mờ giống ảnh */
+    padding: 15px;
+    background: #fff;
+}
+
+/* Tiêu đề Widget (Chính trị, Xã hội...) */
+.widget-title {
+    font-family: 'Merriweather', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+.widget-title a, .widget-title span {
+    text-decoration: none;
+    color: #000;
+    border-bottom: 2px solid #222; /* Gạch chân đậm ngắn dưới chữ */
+    padding-bottom: 8px;
+    display: inline-block;
+    margin-bottom: -1px;
+}
+.widget-title a:hover { color: #0056b3; }
+
+/* Tin đầu tiên (Có ảnh) */
+.widget-first-item {
+    margin-bottom: 15px;
+}
+.widget-thumb img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.widget-first-item h4 {
+    font-family: 'Merriweather', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.4;
+}
+.widget-first-item h4 a { text-decoration: none; color: #333; }
+.widget-first-item h4 a:hover { color: #0056b3; }
+
+/* List tin nhỏ bên dưới */
+.widget-list-item {
+    border-top: 1px solid #f0f0f0;
+    padding: 10px 0;
+}
+.widget-list-item a {
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+.widget-list-item a:hover { color: #0056b3; }
+
+/* --- ĐỌC NHIỀU STYLE --- */
+.most-read-item {
+    display: flex;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    align-items: flex-start;
+}
+.read-number {
+    font-size: 24px;
+    font-weight: 900;
+    color: #ccc; /* Màu số xám nhạt */
+    line-height: 1;
+    font-family: Arial, sans-serif;
+}
+/* Số 1, 2, 3 màu đậm hơn */
+.most-read-item:nth-child(1) .read-number { color: #d0021b; }
+.most-read-item:nth-child(2) .read-number { color: #f5a623; }
+.most-read-item:nth-child(3) .read-number { color: #4a90e2; }
+
+.read-content { flex: 1; }
+.read-content a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.read-thumb { width: 60px; height: 60px; flex-shrink: 0;}
+.read-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 3px; }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom'; 
 import DataFetch from '../Components/fetchRSS/DataFetch';
 import './Page.css';
+import Sidebar from '../Components/Slidebar/Slidebar';
 
 const SERVER_LINK = "http://localhost:4000/";
  
@@ -101,7 +102,7 @@ function ThoiSuPage() {
                             <Link to="/thoi-su/chinh-tri" className={getActiveClass('chinh-tri')}>Chính trị</Link>
                             <Link to="/thoi-su/xa-hoi" className={getActiveClass('xa-hoi')}>Xã hội</Link>
                             <Link to="/thoi-su/do-thi" className={getActiveClass('do-thi')}>Đô thị</Link>
-                            <Link to="/thoi-su/chuyen-thuong-ngay" className={getActiveClass('chuyen-thuong-ngay')}>Chuyện thường ngày</Link>
+                            <Link to="/thoi-su/chuyen-thuong-ngay" className={getActiveClass('chuyen-thuong-ngay')}>Chuyện thường ngày ở phường xã</Link>
                             <Link to="/bien-dao" style={{ textDecoration: 'none', color: '#666' }}>Biển đảo</Link>
                         </div>
                     </>
@@ -143,35 +144,44 @@ function ThoiSuPage() {
                     </div>
 
                     <div className="divider-line"></div>
- 
-                    <div className="news-list">
-                        {listArticlesVisible.map((item, index) => (
-                            <div key={index} className="news-item">
-                                <div className="news-thumb">
-                                    <Link to={getDetailLink(item.link)}>
-                                        <img src={extractImage(item)} alt={item.title} />
-                                    </Link>
-                                </div>
-                                <div className="news-content">
-                                    <h3 className="news-title">
-                                        <Link to={getDetailLink(item.link)}>{item.title}</Link>
-                                    </h3>
-                                    <p className="news-sapo">
-                                        {cleanDescription(item.description || item.contentSnippet).replace(/^(.*?) - /, '')}
-                                    </p>
-                                    <div className="news-meta">
-                                        <span>{new Date(item.pubDate).toLocaleString('vi-VN')}</span>
+                    {/* --- PHẦN LAYOUT 2 CỘT MỚI --- */}
+                    <div className="thoisu-body-flex">
+                        <div className="main-column">
+                            <div className="news-list">
+                                {listArticlesVisible.map((item, index) => (
+                                    <div key={index} className="news-item">
+                                        <div className="news-thumb">
+                                            <Link to={getDetailLink(item.link)}>
+                                                <img src={extractImage(item)} alt={item.title} />
+                                            </Link>
+                                        </div>
+                                        <div className="news-content">
+                                            <h3 className="news-title">
+                                                <Link to={getDetailLink(item.link)}>{item.title}</Link>
+                                            </h3>
+                                            <p className="news-sapo">
+                                                {cleanDescription(item.description || item.contentSnippet).replace(/^(.*?) - /, '')}
+                                            </p>
+                                            <div className="news-meta">
+                                                <span>{new Date(item.pubDate).toLocaleString('vi-VN')}</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
- 
-                    {visibleCount < listArticlesFull.length && (
-                        <div className="load-more-container">
-                            <button onClick={handleLoadMore} className="btn-load-more">XEM THÊM</button>
+                            {/* Nút Xem thêm */}
+                            {visibleCount < listArticlesFull.length && (
+                                <div className="load-more-container">
+                                    <button onClick={handleLoadMore} className="btn-load-more">XEM THÊM</button>
+                                </div>
+                            )}
                         </div>
-                    )}
+                        {/* CỘT PHẢI: SIDEBAR */}
+                        <div className="right-sidebar">
+                            <Sidebar />
+                        </div>
+                    </div>
+                    
                 </>
             )}
         </div>

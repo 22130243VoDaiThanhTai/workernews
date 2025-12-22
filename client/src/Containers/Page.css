@@ -208,3 +208,32 @@
     color: #fff;
     border-color: #d0021b;
 }
+
+/* ... CSS cũ ... */
+
+/* --- LAYOUT 2 CỘT --- */
+.thoisu-body-flex {
+    display: flex;
+    gap: 30px; /* Khoảng cách giữa 2 cột */
+    align-items: flex-start;
+}
+
+.main-column {
+    flex: 2.5; /* Cột tin chính chiếm 2.5 phần (khoảng 70%) */
+}
+
+.right-sidebar {
+    flex: 1; /* Cột sidebar chiếm 1 phần (khoảng 30%) */
+    position: sticky; /* (Tuỳ chọn) Giữ sidebar khi cuộn */
+    top: 20px;
+}
+
+/* Responsive: Trên điện thoại thì cho rớt dòng */
+@media (max-width: 768px) {
+    .thoisu-body-flex {
+        flex-direction: column;
+    }
+    .right-sidebar {
+        width: 100%;
+    }
+}

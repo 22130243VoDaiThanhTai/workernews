@@ -3,12 +3,12 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './Components/Common/Header';
 // import Footer from './Components/Common/Footer';
 import NewsDetail from './Components/NewsDetails/NewsDetail';
-import QuocTePage from './Containers/QuocTePage';
-
 
 // Lazy load các container
 const HomePage = React.lazy(() => import('./Containers/HomePage'));
-const ThoisuPage = React.lazy(() => import('./Containers/ThoiSuPage'));
+
+// IMPORT MASTER PAGE (Thay thế cho ThoiSuPage, QuocTePage...)
+const MasterPage = React.lazy(() => import('./Containers/MasterPage'));
 
 function App() {
     const navigate = useNavigate();
@@ -40,17 +40,16 @@ function App() {
             <Header />
             <Suspense fallback={<div style={{padding:'20px', textAlign:'center'}}>Đang tải...</div>}>
                 <Routes>
+
                     <Route path="/" element={<HomePage />} />
-                    
-                    {/* Route cho trang Thời sự chính */}
-                    <Route path="/thoi-su" element={<ThoisuPage />} />
-                    
-                    {/* Route ĐỘNG cho các mục con (Chính trị, Xã hội, Đô thị...) */}
-                    {/* :subCategory sẽ hứng giá trị như "chinh-tri", "xa-hoi" */}
-                    <Route path="/thoi-su/:subCategory" element={<ThoisuPage />} />
-                    <Route path="/bien-dao" element={<ThoisuPage />} />
-                    <Route path="/quoc-te" element={<QuocTePage />} />
                     <Route path="/detail-article" element={<NewsDetail/>} />
+
+                    {/* /thoi-su, /quoc-te, /khoa-hoc, /bien-dao */}
+                    <Route path="/:mainCategory" element={<MasterPage />} />
+
+                    {/*/thoi-su/chinh-tri, /quoc-te/nguoi-viet-do-day, /quoc-te/hay-la */}
+                    <Route path="/:mainCategory/:subCategory" element={<MasterPage />} />
+
                 </Routes>
             </Suspense>
             {/* <Footer /> */}

@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './Components/Common/Header';
 // import Footer from './Components/Common/Footer';
 import NewsDetail from './Components/NewsDetails/NewsDetail';
-
+import ScrollToTop from './Components/Common/ScrollToTop';
 // Lazy load các container
 const HomePage = React.lazy(() => import('./Containers/HomePage'));
 
@@ -52,6 +52,7 @@ function App() {
 
                 </Routes>
             </Suspense>
+            <ScrollToTop />
             {/* <Footer /> */}
         </div>
     );

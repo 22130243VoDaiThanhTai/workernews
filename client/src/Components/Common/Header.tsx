@@ -12,12 +12,10 @@ function Header() {
     const location = useLocation();
     
     // --- LOGIC STICKY MENU ---
-    // Khai báo rõ kiểu dữ liệu là boolean cho state
     const [isSticky, setIsSticky] = useState<boolean>(false);
 
     useEffect(() => {
         const handleScroll = (): void => {
-            // Khi kéo xuống quá 120px thì ghim menu
             if (window.scrollY > 120) {
                 setIsSticky(true);
             } else {
@@ -26,13 +24,26 @@ function Header() {
         };
 
         window.addEventListener("scroll", handleScroll);
-        
-        // Cleanup function
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
-    // -------------------------
+
+    // --- SỬA LOGIC ACTIVE (QUAN TRỌNG) ---
+    const isActive = (path: string) => {
+        // 1. Trang chủ: Phải trùng khớp tuyệt đối
+        if (path === '/') {
+            return location.pathname === '/' ? 'active' : '';
+        }
+        
+        // 2. Các trang con: Trùng khớp hoặc là thư mục con
+        // VD: path="/thoi-su" sẽ active khi vào "/thoi-su" hoặc "/thoi-su/chinh-tri"
+        if (location.pathname === path || location.pathname.startsWith(path + '/')) {
+            return 'active';
+        }
+        
+        return '';
+    };
 
     return (
         <header className="header">
@@ -97,39 +108,28 @@ function Header() {
                 <div className="header-nav">
                     <div className="container-fluid">
                         <ul className="nav-menu">
-                            <li><Link to="/" className={`nav-item home-icon ${location.pathname === '/' ? 'active' : ''}`}><FaHome size={17} /></Link></li>
-                            <li><Link to="/thoi-su" className="nav-item">THỜI SỰ</Link></li>
-                            <li><Link to="/quoc-te" className="nav-item">QUỐC TẾ</Link></li>
-                            <li><Link to="/lao-dong" className="nav-item">LAO ĐỘNG</Link></li>
-                            <li><Link to="/ban-doc" className="nav-item">BẠN ĐỌC</Link></li>
-                            <li><Link to="/net-zero" className="nav-item">NET ZERO</Link></li>
-                            <li><Link to="/kinh-te" className="nav-item">KINH TẾ</Link></li>
-                            <li><Link to="/suc-khoe" className="nav-item">SỨC KHỎE</Link></li>
-                            <li><Link to="/giao-duc" className="nav-item">GIÁO DỤC</Link></li>
-                            <li><Link to="/phap-luat" className="nav-item">PHÁP LUẬT</Link></li>
-                            <li><Link to="/van-hoa-van-nghe" className="nav-item">VĂN HÓA - VĂN NGHỆ</Link></li>
-                            <li><Link to="/giai-tri" className="nav-item">GIẢI TRÍ</Link></li>
-                            <li><Link to="/the-thao" className="nav-item">THỂ THAO</Link></li>
-                            <li><Link to="/ai-365" className="nav-item">AI 365</Link></li>
+                            <li><Link to="/" className={`nav-item home-icon ${isActive('/')}`}><FaHome size={17} /></Link></li>
+                            <li><Link to="/thoi-su" className={`nav-item ${isActive('/thoi-su')}`}>THỜI SỰ</Link></li>
+                            <li><Link to="/quoc-te" className={`nav-item ${isActive('/quoc-te')}`}>QUỐC TẾ</Link></li>
+                            <li><Link to="/lao-dong" className={`nav-item ${isActive('/lao-dong')}`}>LAO ĐỘNG</Link></li>
+                            <li><Link to="/ban-doc" className={`nav-item ${isActive('/ban-doc')}`}>BẠN ĐỌC</Link></li>
+                            <li><Link to="/net-zero" className={`nav-item ${isActive('/net-zero')}`}>NET ZERO</Link></li>
+                            <li><Link to="/kinh-te" className={`nav-item ${isActive('/kinh-te')}`}>KINH TẾ</Link></li>
+                            <li><Link to="/suc-khoe" className={`nav-item ${isActive('/suc-khoe')}`}>SỨC KHỎE</Link></li>
+                            <li><Link to="/giao-duc" className={`nav-item ${isActive('/giao-duc')}`}>GIÁO DỤC</Link></li>
+                            <li><Link to="/phap-luat" className={`nav-item ${isActive('/phap-luat')}`}>PHÁP LUẬT</Link></li>
+                            <li><Link to="/van-hoa-van-nghe" className={`nav-item ${isActive('/van-hoa-van-nghe')}`}>VĂN HÓA - VĂN NGHỆ</Link></li>
+                            <li><Link to="/giai-tri" className={`nav-item ${isActive('/giai-tri')}`}>GIẢI TRÍ</Link></li>
+                            <li><Link to="/the-thao" className={`nav-item ${isActive('/the-thao')}`}>THỂ THAO</Link></li>
+                            <li><Link to="/ai-365" className={`nav-item ${isActive('/ai-365')}`}>AI 365</Link></li>
                             <li>
-                                <a 
-                                    href="https://phunu.nld.com.vn" 
-                                    className="nav-item" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                >
+                                <a href="https://phunu.nld.com.vn" className="nav-item" target="_blank" rel="noopener noreferrer">
                                     PHỤ NỮ
                                 </a>
                             </li>
-          
-                            <li><Link to="/gia-dinh" className="nav-item">GIA ĐÌNH</Link></li>
+                            <li><Link to="/gia-dinh" className={`nav-item ${isActive('/gia-dinh')}`}>GIA ĐÌNH</Link></li>
                             <li>
-                                <a 
-                                    href="https://diaoc.nld.com.vn" 
-                                    className="nav-item" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                >
+                                <a href="https://diaoc.nld.com.vn" className="nav-item" target="_blank" rel="noopener noreferrer">
                                     ĐỊA ỐC
                                 </a>
                             </li>

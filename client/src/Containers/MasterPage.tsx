@@ -54,6 +54,29 @@ function MasterPage() {
     };
 
     useEffect(() => {
+        if (currentConfig) {
+            // 1. Mặc định lấy tên danh mục cha (VD: Thời sự)
+            let pageTitle = currentConfig.title;
+
+            // 2. Nếu đang xem mục con (có subCategory), hãy tìm tên hiển thị của nó
+            if (subCategory) {
+                const subItem = currentConfig.subMenu.find(item => item.path === subCategory);
+                
+                // Nếu tìm thấy, lấy tên mục con (VD: Chính trị)
+                if (subItem) {
+                    pageTitle = subItem.label; 
+                }
+            }
+            document.title = `${pageTitle} | Báo Người Lao Động`;
+        }
+        
+        return () => {
+            document.title = "Báo Người Lao Động";
+        };
+
+    }, [currentConfig, subCategory]);
+
+    useEffect(() => {
         const fetchData = async () => {
             if(!currentConfig) return; 
             setLoading(true);

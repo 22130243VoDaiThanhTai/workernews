@@ -33,7 +33,7 @@ const MENU_CONFIG: Record<string, CategoryConfig> = {
             { title: "Chính trị", rssSlug: "chinh-tri", linkSlug: "chinh-tri" },
             { title: "Xã hội", rssSlug: "xa-hoi", linkSlug: "xa-hoi" },
             { title: "Đô thị", rssSlug: "do-thi", linkSlug: "do-thi" },
-            { title: "Chuyện thường ngày", rssSlug: "chuyen-thuong-ngay", linkSlug: "chuyen-thuong-ngay" }
+            { title: "Chuyện thường ngày", rssSlug: "chuyen-thuong-ngay", linkSlug: "chuyen-thuong-ngay" },
         ]
     },
 

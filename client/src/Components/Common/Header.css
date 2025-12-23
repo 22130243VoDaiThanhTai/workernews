@@ -112,8 +112,8 @@
     align-items: center;
 }
 
-.main-logo { height: 45px; width: auto; }
-.sub-logo { height: 38px; width: auto; }
+.main-logo { height: 38px; width: auto; }
+.sub-logo { height: 30px; width: auto; }
 
 .brand-divider {
     width: 1px;
@@ -182,7 +182,6 @@
 .header-nav-wrapper {
     width: 100%;
     z-index: 9999;
-    transition: all 0.3s ease;
 }
 
 .header-nav-wrapper.sticky {
@@ -191,7 +190,7 @@
     left: 0;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    animation: slideDown 0.3s ease forwards;
+    
 }
 
 @keyframes slideDown {
@@ -230,7 +229,6 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
     transition: background-color 0.2s;
 }
 

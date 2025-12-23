@@ -58,7 +58,6 @@ const MENU_CONFIG: Record<string, CategoryConfig> = {
             { title: "Quân sự - Quốc phòng", rssSlug: "quan-su-quoc-phong", linkSlug: "quan-su-quoc-phong" }
         ]
     },
-    
 
     // CÁC TRANG KHÁC
     "bien-dao": {
@@ -74,6 +73,44 @@ const MENU_CONFIG: Record<string, CategoryConfig> = {
         rssSlug: "khoa-hoc",
         subMenu: [],
         sidebarWidgets: []
+    },
+    "lao-dong": {
+        title: "Lao động",
+        basePath: "/lao-dong",
+        rssSlug: "lao-dong",
+        subMenu: [
+            { label: "Công đoàn - Công nhân", path: "cong-doan-cong-nhan" },
+            { label: "Việc làm", path: "viec-lam" },
+            { label: "An sinh xã hội", path: "an-sinh-xa-hoi" },
+            { label: "Chính sách", path: "chinh-sach" },
+            { label: "Xuất khẩu lao động", path: "xuat-khau-lao-dong" }
+        ],
+        sidebarWidgets: [
+            { title: "Công đoàn - Công nhân", rssSlug: "cong-doan-cong-nhan", linkSlug: "cong-doan-cong-nhan" },
+            { title: "Việc làm", rssSlug: "viec-lam", linkSlug: "viec-lam" },
+            { title: "An sinh xã hội", rssSlug: "an-sinh-xa-hoi", linkSlug: "an-sinh-xa-hoi" },
+            { title: "Chính sách", rssSlug: "chinh-sach", linkSlug: "chinh-sach" },
+            { title: "Xuất khẩu lao động", rssSlug: "xuat-khau-lao-dong", linkSlug: "xuat-khau-lao-dong" }
+        ]
+    },
+    "ban-doc": {
+        title: "Bạn đọc",
+        basePath: "/ban-doc",
+        rssSlug: "ban-doc",
+        subMenu: [
+            { label: "Nhà ở xã hội", path: "nha-o-xa-hoi" },
+            { label: "Tôi lên tiếng", path: "toi-len-tieng" },
+            { label: "Góc ảnh bạn đọc", path: "goc-anh-ban-doc" },
+            { label: "Cuộc sống nhân ái", path: "cuoc-song-nhan-ai" },
+            { label: "Thư bạn đọc", path: "thu-ban-doc" }
+        ],
+        sidebarWidgets: [
+            { title: "Nhà ở xã hội", rssSlug: "nha-o-xa-hoi", linkSlug: "nha-o-xa-hoi" },
+            { title: "Tôi lên tiếng", rssSlug: "toi-len-tieng", linkSlug: "toi-len-tieng" },
+            { title: "Góc ảnh bạn đọc", rssSlug: "goc-anh-ban-doc", linkSlug: "goc-anh-ban-doc" },
+            { title: "Cuộc sống nhân ái", rssSlug: "cuoc-song-nhan-ai", linkSlug: "cuoc-song-nhan-ai" },
+            { title: "Thư bạn đọc", rssSlug: "thu-ban-doc", linkSlug: "thu-ban-doc" }
+        ]
     }
 };
 

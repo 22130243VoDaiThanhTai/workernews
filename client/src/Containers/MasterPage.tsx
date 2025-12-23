@@ -115,6 +115,32 @@ function MasterPage() {
                 {currentConfig.subMenu.length > 0 && (
                     <div className="sub-nav">
                         {currentConfig.subMenu.map((item, idx) => {
+                            // Kiểm tra xem có phải link ngoài không, (phần giải mai vàng danh mục Văn hóa - Văn nghệ)
+                            const isExternal = item.path.startsWith('https');
+                            if (isExternal) {
+                                return (
+                                    <a 
+                                        key={idx} 
+                                        href={item.path} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className=""
+                                        style={{ 
+                                            textDecoration: 'none', 
+                                            fontFamily: 'Roboto, sans-serif', 
+                                            color: '#666', 
+                                            fontSize: '15px', 
+                                            fontWeight: 600, 
+                                            paddingBottom: '5px',
+                                            borderBottom: '2px solid transparent'
+                                        }}
+                                    >
+                                        {item.label}
+                                    </a>
+                                );
+                            }
+
+                            // Nếu là Link Nội bộ (Giữ nguyên code cũ)
                             const linkTo = item.path.startsWith('/') ? item.path : `${currentConfig.basePath}/${item.path}`;
                             return (
                                 <Link key={idx} to={linkTo} className={getActiveClass(item.path)}>

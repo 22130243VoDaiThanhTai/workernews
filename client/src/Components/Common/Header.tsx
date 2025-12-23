@@ -111,9 +111,28 @@ function Header() {
                             <li><Link to="/giai-tri" className="nav-item">GIẢI TRÍ</Link></li>
                             <li><Link to="/the-thao" className="nav-item">THỂ THAO</Link></li>
                             <li><Link to="/ai-365" className="nav-item">AI 365</Link></li>
-                            <li><Link to="/phu-nu" className="nav-item">PHỤ NỮ</Link></li>
+                            <li>
+                                <a 
+                                    href="https://phunu.nld.com.vn" 
+                                    className="nav-item" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                >
+                                    PHỤ NỮ
+                                </a>
+                            </li>
+          
                             <li><Link to="/gia-dinh" className="nav-item">GIA ĐÌNH</Link></li>
-                            <li><Link to="/dia-oc" className="nav-item">ĐỊA ỐC</Link></li>
+                            <li>
+                                <a 
+                                    href="https://diaoc.nld.com.vn" 
+                                    className="nav-item" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                >
+                                    ĐỊA ỐC
+                                </a>
+                            </li>
                             <li><a href="#" className="nav-item dots"><FaEllipsisH /></a></li>
                         </ul>
                     </div>

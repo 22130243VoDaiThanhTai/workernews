@@ -22,9 +22,15 @@ function App() {
             if (link && link.href && !link.href.includes("facebook") && !link.href.includes("zalo")) {
                 const isInternalLink = link.href.includes("localhost") || link.href.includes("detail-article");
                 const isNewsLink = link.href.includes(".htm") || link.href.includes("nld.com.vn");
-
+                
+                //Thêm trường hợp trang mai vàng
+                //const isMaiVang = link.href.includes("maivang.nld.com.vn");
+                const isExternalSubdomain = 
+                    link.href.includes("maivang.nld.com.vn") || 
+                    link.href.includes("phunu.nld.com.vn") || 
+                    link.href.includes("diaoc.nld.com.vn");
                 // Nếu là link báo và không phải link nội bộ -> Chặn lại và chuyển hướng
-                if (isNewsLink && !isInternalLink) { 
+                if (isNewsLink && !isInternalLink && !isExternalSubdomain) { 
                       event.preventDefault();
                       navigate(`/detail-article?link=${encodeURIComponent(link.href)}`);
                 }

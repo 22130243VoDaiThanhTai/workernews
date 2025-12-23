@@ -1,16 +1,16 @@
-/* Container chung */
+
 .sidebar-container {
     width: 100%;
 }
 
 .sidebar-widget {
     margin-bottom: 30px;
-    border: 1px solid #eee; /* Khung viền mờ giống ảnh */
+    border: 1px solid #eee;
     padding: 15px;
     background: #fff;
 }
 
-/* Tiêu đề Widget (Chính trị, Xã hội...) */
+
 .widget-title {
     font-family: 'Merriweather', serif;
     font-size: 20px;
@@ -22,8 +22,8 @@
 .widget-title a, .widget-title span {
     text-decoration: none;
     color: #000;
-    border-bottom: 2px solid #222; /* Gạch chân đậm ngắn dưới chữ */
-    padding-bottom: 8px;
+    border-bottom: 2px solid #222; 
+    padding-bottom: 2px;
     display: inline-block;
     margin-bottom: -1px;
 }
@@ -92,6 +92,7 @@
     font-family: 'Roboto', sans-serif;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

@@ -1,10 +1,11 @@
-/* --- CẤU HÌNH CHUNG --- */
+/* dung lam css chung cho cac trang danh muc */
+
 .thoisu-container {
-    max-width: 980px; 
+    max-width: 1200px; 
     margin: 0 auto;
     padding: 20px 0;
     /* Font mặc định dự phòng */
-    font-family: Arial, Helvetica, sans-serif; 
+    font-family: 'Roboto', sans-serif; 
 }
 
 /* --- HEADER: TIÊU ĐỀ & MENU --- */
@@ -13,17 +14,16 @@
     align-items: baseline;  
     border-bottom: 1px solid #ddd;
     margin-bottom: 20px;
-    padding-bottom: 10px; /* Tăng nhẹ padding để gạch chân menu không bị dính */
 }
 
-/* Tiêu đề lớn "Thời sự" */
+/* Tiêu đề lớn vd: "Thời sự" */
 .section-title {
-    font-family: 'Merriweather', serif; /* Font mới */
-    font-size: 34px; /* To hơn chút */
-    font-weight: 900; /* Đậm hơn */
+    font-family: 'Merriweather', serif; 
+    font-size: 34px; 
+    font-weight: 900; 
     color: #222;  
     margin: 0;
-    margin-right: 0; /* Reset margin phải để dùng gap bên dưới */
+    margin-right: 0;
     text-transform: none;  
     line-height: 1;
 }
@@ -31,33 +31,33 @@
 /* Menu con (Chính trị, Xã hội...) */
 .sub-nav {
     display: flex;
-    gap: 20px; /* Khoảng cách giữa các mục */
-    margin-left: 25px; /* Cách tiêu đề Thời sự ra */
+    gap: 25px; /* Khoảng cách giữa các mục */
+    margin-left: 30px; /* Cách tiêu đề Thời sự ra */
 }
 
 .sub-nav a {
     text-decoration: none;
-    font-family: 'Roboto', sans-serif; /* Font mới */
+    font-family: 'Roboto', sans-serif;
     color: #666;
     font-size: 15px;
-    font-weight: 400;
-    padding-bottom: 5px; /* Khoảng cách cho gạch chân */
+    font-weight: 600;
+    padding-bottom: 8px;
     transition: all 0.2s ease;
-    border-bottom: 2px solid transparent; /* Giữ chỗ cho border để không bị nhảy hình */
+    border-bottom: 2px solid transparent; 
 }
 
 .sub-nav a:hover { 
     color: #0056b3; 
 }
 
-/* Class Active: Khi mục được chọn (Màu xanh + Đậm + Gạch chân) */
+/* Class Active: Khi mục được chọn (Màu xanh + Đậm hơn) */
 .sub-nav a.active-link {
     color: #0056b3; 
-    font-weight: 700;
-    border-bottom: 2px solid #0056b3;
+    font-weight: 900;
+
 }
 
-/* --- PHẦN TIN NỔI BẬT (HERO) --- */
+/* --- PHẦN TIN NỔI BẬT --- */
 .hero-wrapper {
     display: flex;
     gap: 30px;
@@ -191,7 +191,7 @@
 .btn-load-more {
     background-color: #fff;
     border: 1px solid #e5e5e5;
-    color: #d0021b;  
+    color: #757272;  
     padding: 10px 40px;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -204,17 +204,15 @@
 }
 
 .btn-load-more:hover {
-    background-color: #d0021b;
+    background-color: #3202d0;
     color: #fff;
-    border-color: #d0021b;
+    border-color: #3202d0;
 }
-
-/* ... CSS cũ ... */
 
 /* --- LAYOUT 2 CỘT --- */
 .thoisu-body-flex {
     display: flex;
-    gap: 30px; /* Khoảng cách giữa 2 cột */
+    gap: 40px; /* Khoảng cách giữa 2 cột */
     align-items: flex-start;
 }
 

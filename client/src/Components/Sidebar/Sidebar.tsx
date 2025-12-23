@@ -88,9 +88,9 @@ function Sidebar() {
         fetchSidebarData();
     }, []);
 
-    // Logic kiểm tra để ẩn mục đang xem
-    // Kiểm tra currentPath có chứa slug không.
-    // Ví dụ: đang ở /thoi-su/chinh-tri -> currentPath chứa 'chinh-tri' -> Ẩn Box Chính trị
+    // kiểm tra để ẩn mục đang xem
+    // kiểm tra currentPath có chứa slug không.
+    // ví dụ: đang ở /thoi-su/chinh-tri -> currentPath chứa 'chinh-tri' -> Ẩn Box Chính trị
     
     return (
         <div className="sidebar-container">

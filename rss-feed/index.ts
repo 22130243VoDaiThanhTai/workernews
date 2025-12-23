@@ -53,10 +53,31 @@ app.post('/', async (req: Request<{}, {}, RequestBody>, res: Response) => {
             case "chuyen-thuong-ngay": rssSlug = "thoi-su/chuyen-thuong-ngay-o-phuong-xa"; break;
             case "bien-dao": rssSlug = "bien-dao"; break;
 
-            // --- CÁC MỤC KHÁC ---
+           // --- QUỐC TẾ
             case "quoc-te": rssSlug = "quoc-te"; break;
+            case "nguoi-viet-do-day": rssSlug = "quoc-te/nguoi-viet-do-day"; break; 
+            case "hay-la": rssSlug = "quoc-te/hay-la"; break; 
+            case "van-de-nong": rssSlug = "quoc-te/van-de-nong"; break;
+            case "ho-so": rssSlug = "quoc-te/ho-so"; break;
+            case "quan-su-quoc-phong": rssSlug = "quoc-te/quan-su-quoc-phong"; break;
+            case "khoa-hoc": rssSlug = "khoa-hoc"; break;
+
             case "lao-dong": rssSlug = "lao-dong"; break;
+            case "cong-doan-cong-nhan": rssSlug = "lao-dong/cong-doan-cong-nhan"; break;
+            case "viec-lam": rssSlug = "lao-dong/viec-lam"; break;
+            case "an-sinh-xa-hoi": rssSlug = "lao-dong/an-sinh-xa-hoi"; break; 
+            case "chinh-sach": rssSlug = "lao-dong/chinh-sach"; break; 
+            case "xuat-khau-lao-dong": rssSlug = "lao-dong/xuat-khau-lao-dong"; break; 
+            
+
             case "ban-doc": rssSlug = "ban-doc"; break;
+            case "nha-o-xa-hoi": rssSlug = "ban-doc/nha-o-xa-hoi"; break;
+            case "toi-len-tieng": rssSlug = "ban-doc/toi-len-tieng"; break;
+            case "goc-anh-ban-doc": rssSlug = "ban-doc/goc-anh-ban-doc"; break;
+            case "cuoc-song-nhan-ai": rssSlug = "ban-doc/cuoc-song-nhan-ai"; break;
+            case "thu-ban-doc": rssSlug = "ban-doc/thu-ban-doc"; break;
+
+
             case "net-zero": rssSlug = "net-zero"; break;
             case "kinh-te": rssSlug = "kinh-te"; break;
             case "suc-khoe": rssSlug = "suc-khoe"; break;

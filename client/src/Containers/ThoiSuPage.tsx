@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom'; 
 import DataFetch from '../Components/fetchRSS/DataFetch';
 import './Page.css';
-import Sidebar from '../Components/Slidebar/Slidebar';
+import Sidebar from '../Components/Sidebar/Sidebar';
 
 const SERVER_LINK = "http://localhost:4000/";
  

@@ -10,6 +10,7 @@ const HomePage = React.lazy(() => import('./Containers/HomePage'));
 // IMPORT MASTER PAGE (Thay thế cho ThoiSuPage, QuocTePage...)
 const MasterPage = React.lazy(() => import('./Containers/MasterPage'));
 
+
 function App() {
     const navigate = useNavigate();
 
@@ -48,6 +49,7 @@ function App() {
                 <Routes>
 
                     <Route path="/" element={<HomePage />} />
+
                     <Route path="/detail-article" element={<NewsDetail/>} />
 
                     {/* /thoi-su, /quoc-te, /khoa-hoc, /bien-dao */}

@@ -9,6 +9,8 @@ import QuocTePage from './Containers/QuocTePage';
 const HomePage = React.lazy(() => import('./Containers/HomePage'));
 const ThoisuPage = React.lazy(() => import('./Containers/ThoiSuPage'));
 const LaoDongPage = React.lazy(() => import('./Containers/LaoDongPage'));
+const BanDocPage = React.lazy(() => import('./Containers/BanDocPage'));
+
 
 function App() {
     const navigate = useNavigate();
@@ -47,6 +49,7 @@ function App() {
                     <Route path="/thoi-su" element={<ThoisuPage />} />
                     <Route path="/quoc-te" element={<QuocTePage />} />
                     <Route path="/lao-dong" element={<LaoDongPage />} />
+                    <Route path="/ban-doc" element={<BanDocPage />} />
                     <Route path="/detail-article" element={<NewsDetail/>} />
                 </Routes>
             </Suspense>

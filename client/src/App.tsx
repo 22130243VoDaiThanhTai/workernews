@@ -8,6 +8,7 @@ import QuocTePage from './Containers/QuocTePage';
 // Lazy load các container
 const HomePage = React.lazy(() => import('./Containers/HomePage'));
 const ThoisuPage = React.lazy(() => import('./Containers/ThoiSuPage'));
+const LaoDongPage = React.lazy(() => import('./Containers/LaoDongPage'));
 
 function App() {
     const navigate = useNavigate();
@@ -45,6 +46,7 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/thoi-su" element={<ThoisuPage />} />
                     <Route path="/quoc-te" element={<QuocTePage />} />
+                    <Route path="/lao-dong" element={<LaoDongPage />} />
                     <Route path="/detail-article" element={<NewsDetail/>} />
                 </Routes>
             </Suspense>

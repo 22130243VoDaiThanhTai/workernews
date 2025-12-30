@@ -27,7 +27,7 @@ const GetDetailArticle = async (url: string): Promise<ArticleDetail | null> => {
         const dom = new JSDOM(html);
         const doc = dom.window.document;
 
-        // --- 1. LẤY SAPO (Thử mọi class có thể của NLD) ---
+        // ---  LẤY SAPO ---
         // Danh sách các class mà NLD dùng cho Sapo ở các chuyên mục khác nhau
         const sapoSelectors = [
             '.sapo-content', 
@@ -43,7 +43,7 @@ const GetDetailArticle = async (url: string): Promise<ArticleDetail | null> => {
             sapoElement = doc.querySelector(selector);
             if (sapoElement) {
                 console.log(`=> Đã tìm thấy Sapo bằng selector: ${selector}`);
-                break; // Tìm thấy thì dừng ngay
+                break; // Tìm thấy thì dừng
             }
         }
 
@@ -57,7 +57,7 @@ const GetDetailArticle = async (url: string): Promise<ArticleDetail | null> => {
             console.log("=> KHÔNG tìm thấy Sapo nào!");
         }
 
-        // --- 2. LẤY NỘI DUNG CHÍNH ---
+        // ---  LẤY NỘI DUNG CHÍNH ---
         const bodyElement = doc.querySelector('.content-news-detail') 
                          || doc.querySelector('.detail-content')
                          || doc.querySelector('.news-content');
@@ -74,7 +74,7 @@ const GetDetailArticle = async (url: string): Promise<ArticleDetail | null> => {
         // --- GỘP: SAPO LÊN TRƯỚC BODY ---
         const fullContent = sapoHtml + bodyHtml;
 
-        // --- 3. CÁC THÔNG TIN KHÁC (GIỮ NGUYÊN) ---
+        // ---  CÁC THÔNG TIN KHÁC ---
         let title = doc.querySelector('h1.title-content')?.textContent?.trim() || 
                     doc.querySelector('h1')?.textContent?.trim() || '';
 
@@ -84,7 +84,7 @@ const GetDetailArticle = async (url: string): Promise<ArticleDetail | null> => {
         let authorName = 'Người Lao Động';
         let category = 'Tin tức';
         
-        // JSON-LD Logic (Giữ nguyên)
+        // JSON-LD Logic
         const jsonScripts = doc.querySelectorAll('script[type="application/ld+json"]');
         for (const script of jsonScripts) {
             try {

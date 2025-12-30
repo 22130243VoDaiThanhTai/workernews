@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { FaHome, FaSearch, FaUserCircle, FaFacebook, FaYoutube, FaRss, FaEllipsisH } from "react-icons/fa";
+import { FaHome, FaSearch, FaUserCircle, FaFacebook, FaYoutube, FaRss, FaEllipsisH, FaTimes } from "react-icons/fa";
 import { SiZalo } from "react-icons/si";
 import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
+import ExpandedMenu from "./ExpandedMenu";
 
 function Header() {
     const date: Date = new Date();
@@ -12,12 +13,10 @@ function Header() {
     const location = useLocation();
     
     // --- LOGIC STICKY MENU ---
-    // Khai báo rõ kiểu dữ liệu là boolean cho state
     const [isSticky, setIsSticky] = useState<boolean>(false);
 
     useEffect(() => {
         const handleScroll = (): void => {
-            // Khi kéo xuống quá 120px thì ghim menu
             if (window.scrollY > 120) {
                 setIsSticky(true);
             } else {
@@ -26,13 +25,42 @@ function Header() {
         };
 
         window.addEventListener("scroll", handleScroll);
-        
-        // Cleanup function
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
-    // -------------------------
+
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+    useEffect(() => {
+        const handleScroll = (): void => {
+            if (window.scrollY > 120) setIsSticky(true);
+            else setIsSticky(false);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+    
+    const isActive = (path: string) => {
+
+        if (path === '/') {
+            return location.pathname === '/' ? 'active' : '';
+        }
+        
+        if (location.pathname === path || location.pathname.startsWith(path + '/')) {
+            return 'active';
+        }
+        
+        return '';
+    };
+
+    const toggleMenu = (e: React.MouseEvent) => {
+        e.preventDefault(); // Chặn link # mặc định
+        setIsMenuOpen(!isMenuOpen);
+    };
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    }
 
     return (
         <header className="header">
@@ -64,11 +92,11 @@ function Header() {
             <div className="header-main">
                 <div className="container header-main-flex">
                     <div className="brand-section">
-                        <Link to="/" className="logo-link">
+                        <Link to="/" className="logo-link" onClick={closeMenu}>
                             <img src="https://i.ibb.co/TxV1Pb1D/logo-nld.png" alt="Người Lao Động" className="main-logo"/>
                         </Link>
                         <div className="brand-divider"></div>
-                        <a href="#" className="logo-link">
+                        <a href="#" className="logo-link" onClick={closeMenu}>
                             <img src="https://i.ibb.co/GvxbcGvT/Logoenglish.png" alt="NLD English" className="sub-logo"/>
                         </a>
                         <div className="brand-divider"></div>
@@ -95,27 +123,41 @@ function Header() {
             
             <div className={`header-nav-wrapper ${isSticky ? 'sticky' : ''}`}>
                 <div className="header-nav">
-                    <div className="container-fluid">
-                        <ul className="nav-menu">
-                            <li><Link to="/" className={`nav-item home-icon ${location.pathname === '/' ? 'active' : ''}`}><FaHome size={17} /></Link></li>
-                            <li><Link to="/thoi-su" className="nav-item">THỜI SỰ</Link></li>
-                            <li><Link to="/quoc-te" className="nav-item">QUỐC TẾ</Link></li>
-                            <li><Link to="/lao-dong" className="nav-item">LAO ĐỘNG</Link></li>
-                            <li><Link to="/ban-doc" className="nav-item">BẠN ĐỌC</Link></li>
-                            <li><Link to="/net-zero" className="nav-item">NET ZERO</Link></li>
-                            <li><Link to="/kinh-te" className="nav-item">KINH TẾ</Link></li>
-                            <li><Link to="/suc-khoe" className="nav-item">SỨC KHỎE</Link></li>
-                            <li><Link to="/giao-duc" className="nav-item">GIÁO DỤC</Link></li>
-                            <li><Link to="/phap-luat" className="nav-item">PHÁP LUẬT</Link></li>
-                            <li><Link to="/van-hoa-van-nghe" className="nav-item">VĂN HÓA - VĂN NGHỆ</Link></li>
-                            <li><Link to="/giai-tri" className="nav-item">GIẢI TRÍ</Link></li>
-                            <li><Link to="/the-thao" className="nav-item">THỂ THAO</Link></li>
-                            <li><Link to="/ai-365" className="nav-item">AI 365</Link></li>
-                            <li><Link to="/phu-nu" className="nav-item">PHỤ NỮ</Link></li>
-                            <li><Link to="/gia-dinh" className="nav-item">GIA ĐÌNH</Link></li>
-                            <li><Link to="/dia-oc" className="nav-item">ĐỊA ỐC</Link></li>
-                            <li><a href="#" className="nav-item dots"><FaEllipsisH /></a></li>
+                    <div className="container-fluid" style={{position: 'relative'}}> 
+                        <ul className="nav-menu"> 
+                            <li><Link to="/" className={`nav-item home-icon ${isActive('/')}`} onClick={closeMenu}><FaHome size={17} /></Link></li>
+                            <li><Link to="/thoi-su" className={`nav-item ${isActive('/thoi-su')}`} onClick={closeMenu}>THỜI SỰ</Link></li>
+                            <li><Link to="/quoc-te" className={`nav-item ${isActive('/quoc-te')}`} onClick={closeMenu}>QUỐC TẾ</Link></li>
+                            <li><Link to="/lao-dong" className={`nav-item ${isActive('/lao-dong')}`} onClick={closeMenu}>LAO ĐỘNG</Link></li>
+                            <li><Link to="/ban-doc" className={`nav-item ${isActive('/ban-doc')}`} onClick={closeMenu}>BẠN ĐỌC</Link></li>
+                            <li><Link to="/net-zero" className={`nav-item ${isActive('/net-zero')}`} onClick={closeMenu}>NET ZERO</Link></li>
+                            <li><Link to="/kinh-te" className={`nav-item ${isActive('/kinh-te')}`} onClick={closeMenu}>KINH TẾ</Link></li>
+                            <li><Link to="/suc-khoe" className={`nav-item ${isActive('/suc-khoe')}`} onClick={closeMenu}>SỨC KHỎE</Link></li>
+                            <li><Link to="/giao-duc" className={`nav-item ${isActive('/giao-duc')}`} onClick={closeMenu}>GIÁO DỤC</Link></li>
+                            <li><Link to="/phap-luat" className={`nav-item ${isActive('/phap-luat')}`} onClick={closeMenu}>PHÁP LUẬT</Link></li>
+                            <li><Link to="/van-hoa-van-nghe" className={`nav-item ${isActive('/van-hoa-van-nghe')}`} onClick={closeMenu}>VĂN HÓA - VĂN NGHỆ</Link></li>
+                            <li><Link to="/giai-tri" className={`nav-item ${isActive('/giai-tri')}`} onClick={closeMenu}>GIẢI TRÍ</Link></li>
+                            <li><Link to="/the-thao" className={`nav-item ${isActive('/the-thao')}`} onClick={closeMenu}>THỂ THAO</Link></li>
+                            <li><Link to="/ai-365" className={`nav-item ${isActive('/ai-365')}`} onClick={closeMenu}>AI 365</Link></li>
+                            <li>
+                                <a href="https://phunu.nld.com.vn" className="nav-item" target="_blank" rel="noopener noreferrer">
+                                    PHỤ NỮ
+                                </a>
+                            </li>
+                            <li><Link to="/gia-dinh" className={`nav-item ${isActive('/gia-dinh')}`} onClick={closeMenu}>GIA ĐÌNH</Link></li>
+                            <li>
+                                <a href="https://diaoc.nld.com.vn" className="nav-item" target="_blank" rel="noopener noreferrer">
+                                    ĐỊA ỐC
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" className={`nav-item dots ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+                                    {/* Nếu menu mở thì hiện icon X (FaTimes), nếu đóng thì hiện 3 chấm */}
+                                    {isMenuOpen ? <FaTimes size={16} /> : <FaEllipsisH size={16} />}
+                                </a>
+                            </li>
                         </ul>
+                        <ExpandedMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
                     </div>
                 </div>
             </div>

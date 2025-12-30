@@ -10,6 +10,7 @@ const HomePage = React.lazy(() => import('./Containers/HomePage'));
 const ThoisuPage = React.lazy(() => import('./Containers/ThoiSuPage'));
 const LaoDongPage = React.lazy(() => import('./Containers/LaoDongPage'));
 const BanDocPage = React.lazy(() => import('./Containers/BanDocPage'));
+const NetZeroPage = React.lazy(() => import('./Containers/NetZeroPage'));
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
                     <Route path="/quoc-te" element={<QuocTePage />} />
                     <Route path="/lao-dong" element={<LaoDongPage />} />
                     <Route path="/ban-doc" element={<BanDocPage />} />
+                    <Route path="/net-zero" element={<NetZeroPage />} />
                     <Route path="/detail-article" element={<NewsDetail/>} />
                 </Routes>
             </Suspense>

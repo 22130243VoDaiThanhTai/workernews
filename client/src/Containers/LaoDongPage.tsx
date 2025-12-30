@@ -88,10 +88,11 @@ function LaoDongPage() {
             <div className="section-header">
                 <h2 className="section-title">Lao động</h2>
                 <div className="sub-nav">
+                    <a href="#">Công đoàn - Công nhân</a>
                     <a href="#">Việc làm</a>
-                    <a href="#">Công đoàn</a>
-                    <a href="#">Tiền lương</a>
-                    <a href="#">Bảo hiểm</a>
+                    <a href="#">An sinh xã hội</a>
+                    <a href="#">Chính sách</a>
+                    <a href="#">Xuất khẩu lao động</a>
                 </div>
             </div>
 

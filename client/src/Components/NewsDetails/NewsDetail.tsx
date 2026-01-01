@@ -5,6 +5,7 @@ import { SiZalo } from "react-icons/si";
 import { useLocation, Link } from 'react-router-dom';
 import GetDetailArticle, { ArticleDetail } from "../fetchRSS/GetDetailArticle";
 import "./NewsDetail.css";
+import SpeechPlayer from "../SpeechPlayer/SpeechPlayer";
 
 const SERVER_LINK = "http://localhost:4000";
 
@@ -91,17 +92,33 @@ function NewsDetail() {
             </div>
         </div>
 
-        <div className="article-social-row">
-            <div className="fb-like-wrapper">
-                <button className="fb-btn-real like">
-                    <FaThumbsUp className="fb-icon-thumb"/> 
-                    <span>Thích</span>
-                </button>
-                <span className="fb-count-bubble">12</span>
+        <div 
+            className="action-bar-container" 
+            style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '355px', 
+                marginBottom: '15px',
+                marginTop: '10px'
+            }}
+        >
+            <div className="audio-wrapper" style={{ flexShrink: 0 }}> 
+                {detail.content && <SpeechPlayer text={detail.content} />}
             </div>
-            
-            <button className="fb-btn-real share">Chia sẻ</button>
+
+            <div className="social-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div className="fb-like-wrapper">
+                    <button className="fb-btn-real like">
+                        <FaThumbsUp className="fb-icon-thumb"/> 
+                        <span>Thích</span>
+                    </button>
+                    <span className="fb-count-bubble">12</span>
+                </div>
+                
+                <button className="fb-btn-real share">Chia sẻ</button>
+            </div>
         </div>
+        
 
         <div className="article-content-body">
             {/* Sapo in đậm + Áp dụng parseOptions */}

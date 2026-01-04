@@ -1,5 +1,9 @@
+/* =========================================
+   1. CONTAINER & LAYOUT CHÍNH
+   ========================================= */
 
-.nld-container {
+/* Container bao quanh toàn trang */
+.home_container {
     width: 1240px;
     max-width: 100%;
     margin: 20px auto;
@@ -8,29 +12,138 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.top-layout {
+/* Flexbox bao quanh: Main Content (Trái) + Sidebar (Phải) */
+.home_fflex {
     display: flex;
+    justify-content: space-between;
     gap: 20px;
 }
- 
+
+/* =========================================
+   2. KHỐI NỘI DUNG CHÍNH (Bên Trái)
+   ========================================= */
+
+.home_fmain {
+    width: 880px; /* Tổng chiều rộng khối chính */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- TẦNG TRÊN: Chia 2 cột (Bài chính - Cột phụ) --- */
+.home_top_section {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5; /* Gạch ngang phân cách với hàng dưới */
+}
+
+/* Cột Bài Chính (To nhất) */
 .col-large {
-    flex: 2;  
-    border-right: 1px solid #eee;
+    width: 560px; 
     padding-right: 20px;
 }
 
-.main-title { 
-    font-family: "Merriweather", "Times New Roman", serif; 
+/* Cột Giữa (2 bài có ảnh xếp dọc) */
+.col-middle {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- TẦNG DƯỚI: 3 Cột Text đều nhau --- */
+.home_bottom_row {
+    display: flex;
+    padding-top: 20px;
+}
+
+.bottom-item-col {
+    width: 33.33%; /* Chia đều 3 phần */
+    padding: 0 15px;
+    border-right: 1px solid #e5e5e5; /* Gạch dọc ngăn cách */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Căn chỉnh lề cho hàng dưới */
+.bottom-item-col:first-child {
+    padding-left: 0; 
+}
+
+.bottom-item-col:last-child {
+    padding-right: 0; 
+    border-right: none; 
+}
+
+/* =========================================
+   3. SIDEBAR (Bên Phải - Tin Nóng)
+   ========================================= */
+
+.home_trending {
+    width: 320px;
+    padding-left: 20px;
+}
+
+.sidebar-header {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.sidebar-label {
+    font-family: "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #181717; /* Màu đỏ đô đặc trưng NLD */
+}
+
+/* Danh sách tin text sidebar */
+.list-news-text {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 600px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.list-news-text li {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.list-news-text li a {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.4;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+}
+
+.list-news-text li a:hover {
+    color: #005689;
+}
+
+/* =========================================
+   4. TYPOGRAPHY & COMPONENTS (Style bài viết)
+   ========================================= */
+
+/* Link chung */
+a { color: #000; text-decoration: none; transition: 0.2s; }
+a:hover { color: #005689; }
+
+/* Bài Chính */
+.main-title {
+    font-family: "Merriweather", serif;
     font-size: 28px;
     font-weight: 700;
     line-height: 1.3;
     margin-top: 0;
-    margin-bottom: 15px;
-    color: #000;
+    margin-bottom: 10px;
 }
-
-.main-title a { color: #000; text-decoration: none; }
-.main-title a:hover { color: #005689; }
 
 .main-thumb img {
     width: 100%;
@@ -47,97 +160,76 @@
 }
 .prefix { font-weight: bold; color: #555; }
 
- 
-.col-middle {
-    flex: 1;  
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border-right: 1px solid #eee;
-    padding-right: 20px;
-}
-
-.sub-article {
-    display: flex;
-    flex-direction: column;
-}
+/* Bài Cột Giữa (Có ảnh) */
+.sub-article { display: flex; flex-direction: column; }
 
 .sub-thumb img {
     width: 100%;
-    height: 135px; 
+    height: 140px;
     object-fit: cover;
     border-radius: 4px;
     margin-bottom: 8px;
 }
 
-.sub-title { 
+.sub-title {
     font-family: Arial, sans-serif;
     font-size: 16px;
     font-weight: 700;
-    line-height: 1.4;
     margin: 0;
+    line-height: 1.4;
 }
 
-.sub-title a { color: #000; text-decoration: none; }
-.sub-title a:hover { color: #005689; }
- 
-.col-sidebar {
-    flex: 1;  
-}
-
-.sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 8px;
-    margin-bottom: 15px;
-}
-
-.sidebar-label {
-    font-family: "Times New Roman", serif;
-    font-size: 18px;
+/* Bài Text Hàng Dưới (Không ảnh) */
+.bottom-title {
+    font-family: "Merriweather", serif;
+    font-size: 16px;
     font-weight: 700;
-    text-transform: uppercase;
-    color: #222;
-}
-
-.list-news-text {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 450px; 
-    overflow-y: auto;
-    scrollbar-width: thin;
-}
-
-.list-news-text li {
-    padding-bottom: 12px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid #f5f5f5;
-}
-
-.list-news-text li a {
-    font-size: 15px;
-    color: #333;
     line-height: 1.4;
-    text-decoration: none;
-    font-weight: 500;
-    display: block;  
+    margin: 0 0 8px 0;
 }
 
-.list-news-text li a:hover {
-    color: #005689;
+.bottom-sapo {
+    font-size: 13px;
+    color: #555;
+    margin: 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
 }
 
- 
+/* =========================================
+   5. RESPONSIVE (Mobile/Tablet)
+   ========================================= */
+
 @media (max-width: 992px) {
-    .top-layout { flex-direction: column; }
-    .col-large, .col-middle, .col-sidebar { 
-        border-right: none; 
-        padding-right: 0; 
-        width: 100%;
+    /* Chuyển layout ngang thành dọc */
+    .home_fflex, .home_top_section {
+        flex-direction: column;
     }
-    .col-middle { flex-direction: row; }  
-    .sub-article { width: 50%; }
+
+    /* Reset width về 100% */
+    .home_fmain, .home_trending, .col-large, .col-middle {
+        width: 100%;
+        border: none;
+        padding: 0;
+    }
+
+    /* Tầng dưới: xếp dọc 3 bài */
+    .home_bottom_row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .bottom-item-col {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding: 0 0 15px 0 !important;
+    }
+    
+    /* Ẩn bớt border thừa */
+    .home_top_section { border-bottom: none; }
 }

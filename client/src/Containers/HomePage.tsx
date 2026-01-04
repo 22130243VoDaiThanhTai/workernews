@@ -66,62 +66,84 @@ const HomePage = () => {
         loadData();
     }, []);
 
-    const mainArticle = news[0];
-    const subArticles = news.slice(1, 3);
-    const hotNews = tinNong.slice(0, 8);
+    // --- PHÂN CHIA DỮ LIỆU ---
+   const mainArticle = news[0];             // 1 Bài chính (To nhất - Cột trái trên)
+    const middleArticles = news.slice(1, 3); // 2 Bài có ảnh (Xếp dọc - Cột phải trên)
+    
+    // 3 Bài viết chỉ có chữ, nằm chung 1 hàng dưới cùng
+    const bottomRowArticles = news.slice(3, 6); 
+    
+    const hotNews = tinNong.slice(0, 10);      // Tin nóng Sidebar
 
-    if (news.length === 0) {
-        return (
-            <div style={{padding:'50px', textAlign: 'center'}}>
-                <h3>Đang tải dữ liệu...</h3>
-                <p style={{fontSize: '12px', color: '#666'}}>
-                    (Nếu đợi quá lâu, vui lòng kiểm tra lại Backend Server đã bật chưa)
-                </p>
-            </div>
-        );
-    }
+    if (news.length === 0) return <div style={{padding:'50px', textAlign:'center'}}>Đang tải dữ liệu...</div>;
 
     return (
-        <div className="nld-container">
-            <div className="top-layout">
-                {/* CỘT TRÁI TIN CHÍNH */}
-                <div className="col-large">
-                    {mainArticle && (
-                        <div className="main-article">
-                            <h1 className="main-title">
-                                <Link to={`/detail-article?link=${encodeURIComponent(mainArticle.item.link)}`}>
-                                    {mainArticle.item.title}
-                                </Link>
-                            </h1>
-                            <Link to={`/detail-article?link=${encodeURIComponent(mainArticle.item.link)}`} className="main-thumb">
-                                <img src={getImgSrc(mainArticle.item.content)} alt={mainArticle.item.title} />
-                            </Link>
-                            <p className="main-sapo">
-                                <span className="prefix">(NLĐO) - </span>
-                                {cleanSapo(mainArticle.item.contentSnippet)}
-                            </p>
+        <div className="home_container">
+            <div className="home_fflex">
+                
+                {/* === KHỐI NỘI DUNG CHÍNH (Bên trái Sidebar) === */}
+                <div className="home_fmain">
+                    
+                    {/* TẦNG TRÊN: BÀI CHÍNH (Trái) + CỘT PHỤ (Phải) */}
+                    <div className="home_top_section">
+                        
+                        {/* Cột Trái: Bài Chính */}
+                        <div className="col-large">
+                            {mainArticle && (
+                                <div className="main-article">
+                                    <h1 className="main-title">
+                                        <Link to={`/detail-article?link=${encodeURIComponent(mainArticle.item.link)}`}>
+                                            {mainArticle.item.title}
+                                        </Link>
+                                    </h1>
+                                    <Link to={`/detail-article?link=${encodeURIComponent(mainArticle.item.link)}`} className="main-thumb">
+                                        <img src={getImgSrc(mainArticle.item.content)} alt={mainArticle.item.title} />
+                                    </Link>
+                                    <p className="main-sapo">
+                                        <span className="prefix">(NLĐO) - </span>
+                                        {cleanSapo(mainArticle.item.contentSnippet)}
+                                    </p>
+                                </div>
+                            )}
                         </div>
-                    )}
+
+                        {/* Cột Phải (Của khối chính): 2 Bài có ảnh xếp dọc */}
+                        <div className="col-middle">
+                            {middleArticles.map((item, index) => (
+                                <div key={index} className="sub-article">
+                                    <Link to={`/detail-article?link=${encodeURIComponent(item.item.link)}`} className="sub-thumb">
+                                        <img src={getImgSrc(item.item.content)} alt={item.item.title} />
+                                    </Link>
+                                    <h3 className="sub-title">
+                                        <Link to={`/detail-article?link=${encodeURIComponent(item.item.link)}`}>
+                                            {item.item.title}
+                                        </Link>
+                                    </h3>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* TẦNG DƯỚI: 3 BÀI VIẾT PHỤ NẰM CHUNG 1 HÀNG NGANG */}
+                    <div className="home_bottom_row">
+                        {bottomRowArticles.map((item, index) => (
+                            <div key={index} className="bottom-item-col">
+                                <h3 className="bottom-title">
+                                    <Link to={`/detail-article?link=${encodeURIComponent(item.item.link)}`}>
+                                        {item.item.title}
+                                    </Link>
+                                </h3>
+                                <p className="bottom-sapo">
+                                    {cleanSapo(item.item.contentSnippet).replace(/^\(NLĐO\)\s*-\s*/i, '')}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+
                 </div>
 
-                {/* CỘT GIỮA 2 TIN PHỤ */}
-                <div className="col-middle">
-                    {subArticles.map((item, index) => (
-                        <div key={index} className="sub-article">
-                            <Link to={`/detail-article?link=${encodeURIComponent(item.item.link)}`} className="sub-thumb">
-                                <img src={getImgSrc(item.item.content)} alt={item.item.title} />
-                            </Link>
-                            <h3 className="sub-title">
-                                <Link to={`/detail-article?link=${encodeURIComponent(item.item.link)}`}>
-                                    {item.item.title}
-                                </Link>
-                            </h3>
-                        </div>
-                    ))}
-                </div>
-
-                {/* CỘT PHẢI TIN NÓNG */}
-                <div className="col-sidebar">
+                {/* === KHỐI SIDEBAR (Tin Nóng bên phải cùng) === */}
+                <div className="home_trending">
                     <div className="sidebar-header">
                         <span className="sidebar-label">TIN NÓNG</span>
                     </div>
@@ -137,6 +159,7 @@ const HomePage = () => {
                         </ul>
                     </div>
                 </div>
+
             </div>
         </div>
     );

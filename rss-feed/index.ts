@@ -159,7 +159,13 @@ app.post('/', async (req: Request<{}, {}, RequestBody>, res: Response) => {
             // case "so-hoa": rssSlug = "dia-oc/so-hoa"; break;
             // case "vat-tu": rssSlug = "dia-oc/vat-tu"; break;
             // case "tai-chinh": rssSlug = "dia-oc/tai-chinh"; break;
-            
+
+            case "ly-tuong-song": rssSlug = "ly-tuong-song"; break;
+            case "noi-thang": rssSlug = "noi-thang"; break;
+            case "doc-quyen": rssSlug = "doc-quyen"; break;
+
+            case "tin-24h": rssSlug = "home"; break;
+
             default: rssSlug = "home"; 
         }
 

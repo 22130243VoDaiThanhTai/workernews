@@ -29,6 +29,7 @@ function App() {
                 const isExternalSubdomain = 
                     link.href.includes("maivang.nld.com.vn") || 
                     link.href.includes("phunu.nld.com.vn") || 
+                    link.href.includes("thitruong.nld.com.vn") || 
                     link.href.includes("diaoc.nld.com.vn");
                 // Nếu là link báo và không phải link nội bộ -> Chặn lại và chuyển hướng
                 if (isNewsLink && !isInternalLink && !isExternalSubdomain) { 

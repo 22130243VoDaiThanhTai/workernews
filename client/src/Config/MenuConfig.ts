@@ -311,6 +311,34 @@ const MENU_CONFIG: Record<string, CategoryConfig> = {
         ],
         sidebarWidgets: [           
         ]   
+    }, 
+    "ly-tuong-song": {
+        title: "Lý tưởng sống",
+        basePath: "/ly-tuong-song",
+        rssSlug: "ly-tuong-song",
+        subMenu: [],
+        sidebarWidgets: []
+    },
+    "noi-thang": {
+        title: "Nói thẳng",
+        basePath: "/noi-thang",
+        rssSlug: "noi-thang",
+        subMenu: [],
+        sidebarWidgets: []
+    },
+    "doc-quyen": {
+        title: "Độc quyền",
+        basePath: "/doc-quyen",
+        rssSlug: "doc-quyen",
+        subMenu: [],
+        sidebarWidgets: []
+    },  
+    "tin-24h": {
+        title: "24h qua",
+        basePath: "/tin-24h",
+        rssSlug: "tin-24h",
+        subMenu: [],
+        sidebarWidgets: []
     }
 
 };

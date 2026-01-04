@@ -14,7 +14,7 @@ const ExpandedMenu: React.FC<ExpandedMenuProps> = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        // 1. XÓA onMouseLeave ở đây để không tự tắt khi di chuột ra ngoài
+        // XÓA onMouseLeave ở đây để không tự tắt khi di chuột ra ngoài
         <div className="expanded-menu-overlay">
             <div className="container">
 
@@ -81,17 +81,33 @@ const ExpandedMenu: React.FC<ExpandedMenuProps> = ({ isOpen, onClose }) => {
                         </div>
 
                         <ul className="sidebar-links">
-                            <li className="sidebar-link-item"><a href="#" className="sidebar-text-link">👤 Lý tưởng sống</a></li>
-                            <li className="sidebar-link-item"><a href="#" className="sidebar-text-link">⭐ Nói thẳng</a></li>
-                            <li className="sidebar-link-item"><a href="#" className="sidebar-text-link">📄 Tin độc quyền</a></li>
-                            <li className="sidebar-link-item"><a href="#" className="sidebar-text-link">🌐 Thị trường</a></li>
-                            <li className="sidebar-link-item"><a href="#" className="sidebar-text-link">📞 Liên hệ</a></li>
+                            <li className="sidebar-link-item">
+                                <Link to="/ly-tuong-song" className="sidebar-text-link" onClick={onClose}>
+                                    👤 Lý tưởng sống
+                                </Link>
+                            </li>
+                            <li className="sidebar-link-item">
+                                <Link to="/noi-thang" className="sidebar-text-link" onClick={onClose}>
+                                    ⭐ Nói thẳng
+                                </Link>
+                            </li>
+                            <li className="sidebar-link-item">                        
+                                <Link to="/doc-quyen" className="sidebar-text-link" onClick={onClose}>
+                                    📄 Tin độc quyền
+                                </Link>
+                            </li>
+                            <li className="sidebar-link-item"><a href="https://thitruong.nld.com.vn/" className="sidebar-text-link" target="_blank" rel="noreferrer">🌐 Thị trường</a></li>
+                            <li className="sidebar-link-item">
+                                <Link to="/tin-24h" className="sidebar-text-link" onClick={onClose}>
+                                    🔔 24h qua
+                                </Link>
+                            </li>
                         </ul>
 
                         <div className="menu-socials">
-                            <a href="#" className="menu-social-icon" style={{background: '#1877f2'}}><FaFacebookF /></a>
-                            <a href="#" className="menu-social-icon" style={{background: '#ff0000'}}><FaYoutube /></a>
-                            <a href="#" className="menu-social-icon" style={{background: '#0068ff'}}><SiZalo /></a>
+                            <a href="https://www.facebook.com/nguoilaodong" className="menu-social-icon" style={{background: '#1877f2'}} target="_blank"><FaFacebookF /></a>
+                            <a href="https://www.youtube.com/channel/UCzkyOx_0O1pGOqHiUMOe2KQ?sub_confirmation=1" className="menu-social-icon" style={{background: '#ff0000'}} target="_blank"><FaYoutube /></a>
+                            <a href="https://zalo.me/4417973660626754335" className="menu-social-icon" style={{background: '#0068ff'}} target="_blank"><SiZalo /></a>
                             <a href="#" className="menu-social-icon" style={{background: '#ee802f'}}><FaRss /></a>
                         </div>
                     </div>

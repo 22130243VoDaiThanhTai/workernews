@@ -283,3 +283,84 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+.menu-link {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.menu-link:hover {
+    background: #f2f2f2;
+}
+.user-name {
+    font-weight: 600;
+    color: #333;
+}
+/* === USER DROPDOWN WRAPPER === */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* === MENU CONTAINER === */
+.user-menu {
+    position: absolute;
+    top: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border-radius: 8px;
+    min-width: 170px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    z-index: 1000;
+}
+
+/* hover thì xổ menu */
+.user-dropdown:hover .user-menu {
+    opacity: 1;
+    visibility: visible;
+    top: 150%;
+}
+
+/* === MENU ITEM (LOGIN / REGISTER / LOGOUT) === */
+.user-menu button,
+.user-menu a {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;   /* CĂN GIỮA */
+    align-items: center;
+
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;       /* KHÔNG BẺ DÒNG */
+    transition: background 0.2s ease;
+}
+
+/* hover chung 1 màu */
+.user-menu button:hover,
+.user-menu a:hover {
+    background: #f2f2f2;
+}
+
+/* bo góc item đầu & cuối cho đẹp */
+.user-menu > :first-child:hover {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.user-menu > :last-child:hover {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}

@@ -4,6 +4,8 @@ import Header from './Components/Common/Header';
 // import Footer from './Components/Common/Footer';
 import NewsDetail from './Components/NewsDetails/NewsDetail';
 import ScrollToTop from './Components/Common/ScrollToTop';
+import LoginPage from "./Containers/LoginPage";
+import RegisterPage from "./Containers/RegisterPage";
 // Lazy load các container
 const HomePage = React.lazy(() => import('./Containers/HomePage'));
 
@@ -57,7 +59,8 @@ function App() {
 
                     {/*/thoi-su/chinh-tri, /quoc-te/nguoi-viet-do-day, /quoc-te/hay-la */}
                     <Route path="/:mainCategory/:subCategory" element={<MasterPage />} />
-
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
                 </Routes>
             </Suspense>
             <ScrollToTop />

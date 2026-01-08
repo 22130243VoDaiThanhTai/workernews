@@ -11,9 +11,11 @@ function Header() {
     const dateString: string = `${daysOfWeek[date.getDay()]}, ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 
     const location = useLocation();
-    
+
     // --- LOGIC STICKY MENU ---
     const [isSticky, setIsSticky] = useState<boolean>(false);
+    const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+    const [showUserMenu, setShowUserMenu] = useState(false);
 
     useEffect(() => {
         const handleScroll = (): void => {
@@ -40,17 +42,17 @@ function Header() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
-    
+
     const isActive = (path: string) => {
 
         if (path === '/') {
             return location.pathname === '/' ? 'active' : '';
         }
-        
+
         if (location.pathname === path || location.pathname.startsWith(path + '/')) {
             return 'active';
         }
-        
+
         return '';
     };
 
@@ -61,6 +63,11 @@ function Header() {
     const closeMenu = () => {
         setIsMenuOpen(false);
     }
+    const handleLogout = () => {
+        localStorage.removeItem("currentUser");
+        setShowUserMenu(false);
+        window.location.reload(); // ép Header render lại
+    };
 
     return (
         <header className="header">
@@ -111,7 +118,28 @@ function Header() {
                     </div>
 
                     <div className="actions-section">
-                        <a href="#" className="user-icon"><FaUserCircle size={32} color="#999"/></a>
+                        <div className="user-dropdown">
+                            {currentUser ? (
+                                <span className="user-name">
+                                    {currentUser.username}
+                                </span>
+                            ) : (
+                                <span className="user-icon">
+                                    <FaUserCircle size={32} color="#999" />
+                                </span>
+                            )}
+
+                            <div className="user-menu">
+                                {currentUser ? (
+                                    <button onClick={handleLogout}>Đăng xuất</button>
+                                ) : (
+                                    <>
+                                        <Link to="/login" className="menu-link">Đăng nhập</Link>
+                                        <Link to="/register" className="menu-link">Đăng ký</Link>
+                                    </>
+                                )}
+                            </div>
+                        </div>
                         <a href="#" className="btn-vip">Đăng ký gói bạn đọc VIP</a>
                         <a href="#" className="btn-epaper">E-paper</a>
                     </div>
@@ -120,11 +148,11 @@ function Header() {
 
             {/* 3. MENU ĐIỀU HƯỚNG */}
             <div className="nav-placeholder" style={{ height: isSticky ? '42px' : '0px' }}></div>
-            
+
             <div className={`header-nav-wrapper ${isSticky ? 'sticky' : ''}`}>
                 <div className="header-nav">
-                    <div className="container-fluid" style={{position: 'relative'}}> 
-                        <ul className="nav-menu"> 
+                    <div className="container-fluid" style={{position: 'relative'}}>
+                        <ul className="nav-menu">
                             <li><Link to="/" className={`nav-item home-icon ${isActive('/')}`} onClick={closeMenu}><FaHome size={17} /></Link></li>
                             <li><Link to="/thoi-su" className={`nav-item ${isActive('/thoi-su')}`} onClick={closeMenu}>THỜI SỰ</Link></li>
                             <li><Link to="/quoc-te" className={`nav-item ${isActive('/quoc-te')}`} onClick={closeMenu}>QUỐC TẾ</Link></li>

@@ -6,7 +6,7 @@ import NewsDetail from './Components/NewsDetails/NewsDetail';
 import ScrollToTop from './Components/Common/ScrollToTop';
 // Lazy load các container
 const HomePage = React.lazy(() => import('./Containers/HomePage'));
-
+const DaiHoiDangPage = React.lazy(() => import('./Containers/DaiHoiDangPage'));
 // IMPORT MASTER PAGE (Thay thế cho ThoiSuPage, QuocTePage...)
 const MasterPage = React.lazy(() => import('./Containers/MasterPage'));
 
@@ -52,13 +52,13 @@ function App() {
                     <Route path="/" element={<HomePage />} />
 
                     <Route path="/detail-article" element={<NewsDetail/>} />
-
-                    {/* /thoi-su, /quoc-te, /khoa-hoc, /bien-dao */}
+                    <Route path="/dai-hoi-dang" element={<DaiHoiDangPage />} />
+                    <Route path="/dong-su-kien/:slug" element={<MasterPage />} />
                     <Route path="/:mainCategory" element={<MasterPage />} />
 
                     {/*/thoi-su/chinh-tri, /quoc-te/nguoi-viet-do-day, /quoc-te/hay-la */}
                     <Route path="/:mainCategory/:subCategory" element={<MasterPage />} />
-
+                    
                 </Routes>
             </Suspense>
             <ScrollToTop />

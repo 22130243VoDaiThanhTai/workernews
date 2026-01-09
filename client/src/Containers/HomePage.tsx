@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import DataFetch from "../Components/fetchRSS/DataFetch"; 
+// Import Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+
+import DataFetch from "../Components/fetchRSS/DataFetch";
 import './HomePage.css';
 
 const SERVER_LINK = "http://localhost:4000/";
@@ -8,8 +14,8 @@ const SERVER_LINK = "http://localhost:4000/";
 interface RSSContent {
     title: string;
     link: string;
-    content: string;       // Chứa HTML ảnh
-    contentSnippet?: string; // Đoạn tóm tắt (sapo)
+    content: string;
+    contentSnippet?: string;
     pubDate?: string;
 }
 
@@ -22,17 +28,28 @@ interface HomeRequestPayload {
     datapage: string;
 }
 
-// Helper: Trích xuất ảnh từ HTML content
+// === DỮ LIỆU GIẢ LẬP DÒNG SỰ KIỆN ===
+const TRENDING_TOPICS = [
+    { id: 1, title: "Vụ án Tập đoàn Thuận An", link: "#" },
+    { id: 2, title: "Giảm nghèo bền vững", link: "#" },
+    { id: 3, title: "Xung đột Nga - Ukraine", link: "#" },
+    { id: 4, title: "Thị trường Tết 2026", link: "#" },
+    { id: 5, title: "Đại hội Đảng", link: "/dai-hoi-dang" },
+    { id: 6, title: "Venezuela bị tấn công", link: "#" },
+];
+
 const getImgSrc = (content: string | undefined): string => {
     const regex = /<img[^>]+src="([^">]+)"/;
     const match = (content || "").match(regex);
-    return match ? match[1] : "https://static.nld.com.vn/image/logo.svg"; 
+    return match ? match[1] : "https://static.nld.com.vn/image/logo.svg";
 };
 
-// Helper: Làm sạch đoạn Sapo
-const cleanSapo = (sapo: string | undefined): string => {
+const cleanSapo = (sapo: string | undefined, limit: number = 150): string => {
     if (!sapo) return "";
-    return sapo.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 160) + "...";
+    let text = sapo.replace(/<\/?[^>]+(>|$)/g, ""); 
+    text = text.replace(/^\(NLĐO\)\s*-\s*/i, "");
+    if (text.length > limit) return text.substring(0, limit) + "...";
+    return text;
 };
 
 const HomePage = () => {
@@ -42,52 +59,36 @@ const HomePage = () => {
     useEffect(() => {
         const loadData = async () => {
             try {
-                // Sử dụng Promise.all để chạy 2 request CÙNG LÚC (Song song)
                 const [dataHome, dataHot] = await Promise.all([
-                    // Request 1: Tin chính (Trang chủ)
-                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
-                        signal: "datafetch", 
-                        datapage: "home" 
-                    }),
-                    // Request 2: Tin nóng (Tin mới nhất cho sidebar)
-                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
-                        signal: "datafetch", 
-                        datapage: "home" 
-                    })
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { signal: "datafetch", datapage: "home" }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { signal: "datafetch", datapage: "home" })
                 ]);
 
                 if (dataHome) setNews(dataHome);
-                if (dataHot) setTinNong(dataHot);
-                
-            } catch (error) { 
-                console.error("Lỗi tải trang chủ:", error); 
+                // Lấy 20 tin nóng để test chức năng cuộn
+                if (dataHot) setTinNong(dataHot.slice(0, 20));
+            } catch (error) {
+                console.error("Lỗi tải trang chủ:", error);
             }
         };
         loadData();
     }, []);
 
-    // --- PHÂN CHIA DỮ LIỆU ---
-   const mainArticle = news[0];             // 1 Bài chính (To nhất - Cột trái trên)
-    const middleArticles = news.slice(1, 3); // 2 Bài có ảnh (Xếp dọc - Cột phải trên)
-    
-    // 3 Bài viết chỉ có chữ, nằm chung 1 hàng dưới cùng
-    const bottomRowArticles = news.slice(3, 6); 
-    
-    const hotNews = tinNong.slice(0, 10);      // Tin nóng Sidebar
+    const mainArticle = news[0];
+    const middleArticles = news.slice(1, 3);
+    const bottomRowArticles = news.slice(3, 6);
 
-    if (news.length === 0) return <div style={{padding:'50px', textAlign:'center'}}>Đang tải dữ liệu...</div>;
+    if (news.length === 0) return <div style={{ padding: '50px', textAlign: 'center' }}>Đang tải...</div>;
 
     return (
         <div className="home_container">
             <div className="home_fflex">
-                
-                {/* === KHỐI NỘI DUNG CHÍNH (Bên trái Sidebar) === */}
+
+                {/* === CỘT TRÁI (NỘI DUNG CHÍNH) === */}
                 <div className="home_fmain">
                     
-                    {/* TẦNG TRÊN: BÀI CHÍNH (Trái) + CỘT PHỤ (Phải) */}
+                    {/* 1. Tin chính + Tin phụ (Có ảnh) */}
                     <div className="home_top_section">
-                        
-                        {/* Cột Trái: Bài Chính */}
                         <div className="col-large">
                             {mainArticle && (
                                 <div className="main-article">
@@ -107,7 +108,6 @@ const HomePage = () => {
                             )}
                         </div>
 
-                        {/* Cột Phải (Của khối chính): 2 Bài có ảnh xếp dọc */}
                         <div className="col-middle">
                             {middleArticles.map((item, index) => (
                                 <div key={index} className="sub-article">
@@ -124,7 +124,7 @@ const HomePage = () => {
                         </div>
                     </div>
 
-                    {/* TẦNG DƯỚI: 3 BÀI VIẾT PHỤ NẰM CHUNG 1 HÀNG NGANG */}
+                    {/* 2. Hàng tin phụ (Text) - ĐÃ ĐƯA LÊN TRÊN TRENDING */}
                     <div className="home_bottom_row">
                         {bottomRowArticles.map((item, index) => (
                             <div key={index} className="bottom-item-col">
@@ -134,29 +134,78 @@ const HomePage = () => {
                                     </Link>
                                 </h3>
                                 <p className="bottom-sapo">
-                                    {cleanSapo(item.item.contentSnippet).replace(/^\(NLĐO\)\s*-\s*/i, '')}
+                                    {cleanSapo(item.item.contentSnippet)}
                                 </p>
                             </div>
                         ))}
                     </div>
 
+                    {/* 3. THANH DÒNG SỰ KIỆN (Trending Bar) - ĐÃ CHUYỂN XUỐNG DƯỚI */}
+                    <div className="home__trending_bar">
+                        <div className="label">
+                            <span className="icon">
+                                <img src="https://static.mediacdn.vn/nld.com.vn/image/icon-trending.svg" alt="icon" width="24" height="25" />
+                            </span>
+                        </div>
+                        <div className="content">
+                            <Swiper
+                                modules={[Navigation, Autoplay]}
+                                slidesPerView="auto"
+                                spaceBetween={15}
+                                loop={true}
+                                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                                navigation={{ nextEl: '.swiper-next', prevEl: '.swiper-prev' }}
+                                className="home-treding-sw"
+                            >
+                                {TRENDING_TOPICS.map((topic, index) => (
+                                    <SwiperSlide key={index} style={{ width: 'auto' }}>
+                                        <div className="box-category-item">
+                                            <h3 className="box-category-title-text">
+                                                <Link to={topic.link} className="box-category-link-title" title={topic.title}>
+                                                    {topic.title}
+                                                </Link>
+                                            </h3>
+                                        </div>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                            
+                            <div className="home-treding-sw-control">
+                                <div className="swiper-prev" role="button">
+                                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none"><rect x="0.5" y="1.13867" width="23" height="23" rx="3.5" stroke="#111111"/><path fillRule="evenodd" clipRule="evenodd" d="M13.5303 16.169C13.8232 15.8761 13.8232 15.4012 13.5303 15.1083L11.0607 12.6387L13.5303 10.169C13.8232 9.87611 13.8232 9.40123 13.5303 9.10834C13.2374 8.81545 12.7626 8.81545 12.4697 9.10834L9.46967 12.1083C9.32902 12.249 9.25 12.4398 9.25 12.6387C9.25 12.8376 9.32902 13.0283 9.46967 13.169L12.4697 16.169C12.7626 16.4619 13.2374 16.4619 13.5303 16.169Z" fill="#111111"/></svg>
+                                </div>
+                                <div className="swiper-next" role="button">
+                                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none"><rect x="0.5" y="1.13867" width="23" height="23" rx="3.5" stroke="#111111"/><path fillRule="evenodd" clipRule="evenodd" d="M10.4697 16.169C10.1768 15.8761 10.1768 15.4012 10.4697 15.1083L12.9393 12.6387L10.4697 10.169C10.1768 9.87611 10.1768 9.40123 10.4697 9.10834C10.7626 8.81545 11.2374 8.81545 11.5303 9.10834L14.5303 12.1083C14.671 12.249 14.75 12.4398 14.75 12.6387C14.75 12.8376 14.671 13.0283 14.5303 13.169L11.5303 16.169C11.2374 16.4619 10.7626 16.4619 10.4697 16.169Z" fill="#111111"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-                {/* === KHỐI SIDEBAR (Tin Nóng bên phải cùng) === */}
+                {/* === CỘT PHẢI (SIDEBAR) === */}
                 <div className="home_trending">
                     <div className="sidebar-header">
                         <span className="sidebar-label">TIN NÓNG</span>
                     </div>
-                    <div className="sidebar-content">
+                    {/* List Tin Nóng có cuộn */}
+                    <div className="sidebar-content scroll-box">
                         <ul className="list-news-text">
-                            {hotNews.map((item, index) => (
+                            {tinNong.map((item, index) => (
                                 <li key={index}>
                                     <Link to={`/detail-article?link=${encodeURIComponent(item.item.link)}`}>
                                         {item.item.title}
                                     </Link>
                                 </li>
-                            ))} 
+                            ))}
                         </ul>
+                    </div>
+
+                    {/* Banner Đại Hội Đảng */}
+                    <div className="banner-dhd">
+                        <Link to="/dai-hoi-dang" title="Chào mừng Đại hội Đại biểu toàn quốc lần thứ XIV của Đảng">
+                            <img src="https://static.mediacdn.vn/nld.com.vn/images/banner-dhd.jpg" alt="Đại hội đảng" />
+                        </Link>
                     </div>
                 </div>
 

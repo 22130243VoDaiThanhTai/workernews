@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 
 import DataFetch from "../Components/fetchRSS/DataFetch";
 import './HomePage.css';
+import VipReaderSection from "../Components/Home/VipReaderSection";
 
 const SERVER_LINK = "http://localhost:4000/";
 
@@ -55,18 +56,30 @@ const cleanSapo = (sapo: string | undefined, limit: number = 150): string => {
 const HomePage = () => {
     const [news, setNews] = useState<NewsItem[]>([]);
     const [tinNong, setTinNong] = useState<NewsItem[]>([]);
+    const [vipNews, setVipNews] = useState<NewsItem[]>([]);
 
     useEffect(() => {
         const loadData = async () => {
             try {
-                const [dataHome, dataHot] = await Promise.all([
-                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { signal: "datafetch", datapage: "home" }),
-                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { signal: "datafetch", datapage: "home" })
+                const [dataHome, dataHot, dataVip] = await Promise.all([
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "home" 
+                    }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "home" 
+                    }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "danh-cho-ban-doc-vip" 
+                    })
                 ]);
 
                 if (dataHome) setNews(dataHome);
                 // Lấy 20 tin nóng để test chức năng cuộn
                 if (dataHot) setTinNong(dataHot.slice(0, 20));
+                if (dataVip) setVipNews(dataVip);
             } catch (error) {
                 console.error("Lỗi tải trang chủ:", error);
             }
@@ -210,6 +223,8 @@ const HomePage = () => {
                 </div>
 
             </div>
+            {/* DÀNH CHO BẠN ĐỌC VIP */}
+            <VipReaderSection data={vipNews} />
         </div>
     );
 };

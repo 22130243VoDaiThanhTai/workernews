@@ -80,15 +80,26 @@ function Header() {
                         <a href="#" className="highlight-link">ĐẶT MUA BÁO</a>
                     </div>
                     <div className="top-right">
-                        <a href="#" className="top-link"><span className="icon-prefix">👤</span> Lý tưởng sống</a>
-                        <a href="#" className="top-link"><span className="icon-prefix">⭐</span> Nói thẳng</a>
-                        <a href="#" className="top-link"><span className="icon-prefix">📄</span> Tin độc quyền</a>
-                        <a href="#" className="top-link"><span className="icon-prefix">🌐</span> Thị trường</a>
-                        <a href="#" className="top-link"><span className="icon-prefix">🔔</span> 24h qua</a>
+                        <Link to="/ly-tuong-song" className="top-link">
+                            <span className="icon-prefix">👤</span> Lý tưởng sống
+                        </Link>
+                        <Link to="/noi-thang" className="top-link">
+                            <span className="icon-prefix">⭐</span> Nói thẳng
+                        </Link>
+                        
+                        <Link to="/doc-quyen" className="top-link">
+                            <span className="icon-prefix">📄</span> Tin độc quyền
+                        </Link>
+                        
+                        <a href="https://thitruong.nld.com.vn/" className="top-link" target="_blank" rel="nofollow"><span className="icon-prefix">🌐</span> Thị trường</a>
+                        
+                        <Link to="/tin-24h" className="top-link">
+                            <span className="icon-prefix">🔔</span> 24h qua
+                        </Link>
                         <div className="social-icons">
-                            <a href="#" className="social-icon fb"><FaFacebook /></a>
-                            <a href="#" className="social-icon yt"><FaYoutube /></a>
-                            <a href="#" className="social-icon zalo"><SiZalo /></a>
+                            <a href="https://www.facebook.com/nguoilaodong" className="social-icon fb" target="_blank"><FaFacebook /></a>
+                            <a href="https://www.youtube.com/channel/UCzkyOx_0O1pGOqHiUMOe2KQ?sub_confirmation=1" className="social-icon yt"><FaYoutube /></a>
+                            <a href="https://zalo.me/4417973660626754335" className="social-icon zalo"><SiZalo /></a>
                             <a href="#" className="social-icon rss"><FaRss /></a>
                         </div>
                     </div>

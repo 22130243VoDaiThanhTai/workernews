@@ -311,7 +311,50 @@ const MENU_CONFIG: Record<string, CategoryConfig> = {
         ],
         sidebarWidgets: [           
         ]   
-    }
+    }, 
+    "ly-tuong-song": {
+        title: "Lý tưởng sống",
+        basePath: "/ly-tuong-song",
+        rssSlug: "ly-tuong-song",
+        subMenu: [],
+        sidebarWidgets: []
+    },
+    "noi-thang": {
+        title: "Nói thẳng",
+        basePath: "/noi-thang",
+        rssSlug: "noi-thang",
+        subMenu: [],
+        sidebarWidgets: []
+    },
+    "doc-quyen": {
+        title: "Độc quyền",
+        basePath: "/doc-quyen",
+        rssSlug: "doc-quyen",
+        subMenu: [],
+        sidebarWidgets: []
+    },  
+    "tin-24h": {
+        title: "24h qua",
+        basePath: "/tin-24h",
+        rssSlug: "tin-24h",
+        subMenu: [],
+        sidebarWidgets: []
+    },
+    "dai-hoi-dang": {
+        title: "Đại hội Đảng",
+        basePath: "/dai-hoi-dang",
+        rssSlug: "dai-hoi-dang",
+        subMenu: [
+            { label: "Tin tức - Sự kiện", path: "tin-tuc-su-kien" },
+            { label: "Văn kiện - Nghị quyết", path: "van-kien-nghi-quyet" },
+            { label: "Nhân sự - Chân dung", path: "nhan-su-chan-dung" },
+            { label: "Thông điệp từ lãnh đạo", path: "thong-diep-tu-lanh-dao" },
+            { label: "Diễn đàn ý kiến", path: "dien-dan-y-kien" }
+        ],
+        sidebarWidgets: [
+            { title: "Tiêu điểm", rssSlug: "dai-hoi-dang", linkSlug: "dai-hoi-dang" } 
+        ]
+    },
 
 };
 

@@ -159,6 +159,19 @@ app.post('/', async (req: Request<{}, {}, RequestBody>, res: Response) => {
             // case "so-hoa": rssSlug = "dia-oc/so-hoa"; break;
             // case "vat-tu": rssSlug = "dia-oc/vat-tu"; break;
             // case "tai-chinh": rssSlug = "dia-oc/tai-chinh"; break;
+
+            case "ly-tuong-song": rssSlug = "ly-tuong-song"; break;
+            case "noi-thang": rssSlug = "noi-thang"; break;
+            case "doc-quyen": rssSlug = "doc-quyen"; break;
+
+            case "tin-24h": rssSlug = "home"; break;
+            case "dai-hoi-dang": rssSlug = "dai-hoi-dang"; break;
+            case "tin-tuc-su-kien": rssSlug = "dai-hoi-dang/tin-tuc-su-kien"; break;
+            case "van-kien-nghi-quyet": rssSlug = "dai-hoi-dang/van-kien-nghi-quyet"; break;
+            case "nhan-su-chan-dung": rssSlug = "dai-hoi-dang/nhan-su-chan-dung"; break;
+            case "thong-diep-tu-lanh-dao": rssSlug = "dai-hoi-dang/thong-diep-tu-lanh-dao"; break;
+            case "dien-dan-y-kien": rssSlug = "dai-hoi-dang/dien-dan-y-kien"; break;
+
             
             default: rssSlug = "home"; 
         }

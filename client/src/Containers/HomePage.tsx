@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// Import Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -9,7 +8,7 @@ import "swiper/css/navigation";
 import DataFetch from "../Components/fetchRSS/DataFetch";
 import './HomePage.css';
 import VipReaderSection from "../Components/Home/VipReaderSection";
-
+import BottomNewsSection from "../Components/Home/BottomNewsSection";
 const SERVER_LINK = "http://localhost:4000/";
 
 interface RSSContent {
@@ -57,11 +56,17 @@ const HomePage = () => {
     const [news, setNews] = useState<NewsItem[]>([]);
     const [tinNong, setTinNong] = useState<NewsItem[]>([]);
     const [vipNews, setVipNews] = useState<NewsItem[]>([]);
-
+    const [bottomNewsData, setBottomNewsData] = useState<any>({
+        newsList: [],
+        hoiNong: null,
+        truyVet: null,
+        viewList: []
+    });
+    const [englishNews, setEnglishNews] = useState<NewsItem[]>([]);
     useEffect(() => {
         const loadData = async () => {
             try {
-                const [dataHome, dataHot, dataVip] = await Promise.all([
+                const [dataHome, dataHot, dataVip, dataEnglish] = await Promise.all([
                     DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
                         signal: "datafetch", 
                         datapage: "home" 
@@ -73,13 +78,38 @@ const HomePage = () => {
                     DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
                         signal: "datafetch", 
                         datapage: "danh-cho-ban-doc-vip" 
-                    })
+                    }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "english-news" })
                 ]);
 
                 if (dataHome) setNews(dataHome);
                 // Lấy 20 tin nóng để test chức năng cuộn
                 if (dataHot) setTinNong(dataHot.slice(0, 20));
                 if (dataVip) setVipNews(dataVip);
+                if (dataEnglish) setEnglishNews(dataEnglish);
+                if (dataHome && dataHome.length > 20) {
+                    
+                    // 1. Cột trái: Lấy bài từ index 1 đến 10
+                    const leftNews = dataHome.slice(1, 10);
+                    
+                    // 2. Widget Hỏi nóng: Lấy bài index 11
+                    const hoiNong = dataHome[11];
+
+                    // 3. Widget Truy vết: Lấy bài index 12 
+                    const truyVet = dataHome[12];
+
+                    // 4. Xem nhiều: Lấy bài index 13 đến 18
+                    const mostViewed = dataHome.slice(13, 18);
+                    
+                    setBottomNewsData({
+                        newsList: leftNews,
+                        hoiNong: hoiNong,
+                        truyVet: truyVet,
+                        viewList: mostViewed
+                    });
+                }
             } catch (error) {
                 console.error("Lỗi tải trang chủ:", error);
             }
@@ -225,6 +255,15 @@ const HomePage = () => {
             </div>
             {/* DÀNH CHO BẠN ĐỌC VIP */}
             <VipReaderSection data={vipNews} />
+            <BottomNewsSection 
+                newsList={bottomNewsData.newsList}
+                hotAnswer={bottomNewsData.hoiNong}
+                socialTrace={bottomNewsData.truyVet}
+                speakStraight={bottomNewsData.hoiNong}  // Demo
+                perspective={bottomNewsData.truyVet}    // Demo
+                englishNews={englishNews}
+                mostViewed={bottomNewsData.viewList}
+            />
         </div>
     );
 };

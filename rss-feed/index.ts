@@ -173,7 +173,7 @@ app.post('/', async (req: Request<{}, {}, RequestBody>, res: Response) => {
             case "dien-dan-y-kien": rssSlug = "dai-hoi-dang/dien-dan-y-kien"; break;
             
             case "danh-cho-ban-doc-vip": rssSlug = "danh-cho-ban-doc-vip"; break;
-            
+            case "english-news": rssSlug = "nguoi-lao-dong-news"; break;
             default: rssSlug = "home"; 
         }
 

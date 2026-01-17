@@ -3,7 +3,8 @@ import { Link, useParams, useLocation } from 'react-router-dom';
 import DataFetch from '../Components/fetchRSS/DataFetch';
 import './Page.css';
 import UniversalSidebar from '../Components/Sidebar/GeneralSidebar';
-import MENU_CONFIG from '../Config/MenuConfig'; 
+import MENU_CONFIG from '../Config/MenuConfig';
+import ArticleCard from "../Components/FavoriteNews/ArticleCard";
 
 const SERVER_LINK = "http://localhost:4000/";
 
@@ -213,17 +214,23 @@ function MasterPage() {
                         <div className="main-column">
                             <div className="news-list">
                                 {listArticlesVisible.map((item, index) => (
-                                    <div key={index} className="news-item">
-                                        <div className="news-thumb"><Link to={getDetailLink(item.link)}><img src={extractImage(item)} alt={item.title} /></Link></div>
-                                        <div className="news-content">
-                                            <h3 className="news-title"><Link to={getDetailLink(item.link)}>{item.title}</Link></h3>
-                                            <p className="news-sapo">{cleanDescription(item.description || item.contentSnippet).replace(/^(.*?) - /, '')}</p>
-                                            <div className="news-meta"><span>{new Date(item.pubDate).toLocaleString('vi-VN')}</span></div>
-                                        </div>
-                                    </div>
+                                    <ArticleCard
+                                        key={index}
+                                        article={{
+                                            id: item.link,
+                                            title: item.title,
+                                            link: item.link,
+                                            image: extractImage(item),
+                                            sapo: cleanDescription(item.description || item.contentSnippet)
+                                                .replace(/^(.*?) - /, ''),
+                                            pubDate: new Date(item.pubDate).toLocaleString('vi-VN'),
+                                            detailLink: getDetailLink(item.link)
+                                        }}
+                                    />
                                 ))}
                             </div>
-                             {visibleCount < listArticlesFull.length && (
+
+                            {visibleCount < listArticlesFull.length && (
                                 <div className="load-more-container">
                                     <button onClick={handleLoadMore} className="btn-load-more">XEM THÊM</button>
                                 </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaHome, FaSearch, FaUserCircle, FaFacebook, FaYoutube, FaRss, FaEllipsisH, FaTimes } from "react-icons/fa";
 import { SiZalo } from "react-icons/si";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
 import ExpandedMenu from "./ExpandedMenu";
 
@@ -16,6 +16,7 @@ function Header() {
     const [isSticky, setIsSticky] = useState<boolean>(false);
     const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
     const [showUserMenu, setShowUserMenu] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = (): void => {
@@ -67,6 +68,10 @@ function Header() {
         localStorage.removeItem("currentUser");
         setShowUserMenu(false);
         window.location.reload(); // ép Header render lại
+    };
+    const handleFavorite = () => {
+        setShowUserMenu(false);
+        navigate("/favorites");
     };
 
     return (
@@ -142,7 +147,10 @@ function Header() {
 
                             <div className="user-menu">
                                 {currentUser ? (
-                                    <button onClick={handleLogout}>Đăng xuất</button>
+                                    <>
+                                        <button onClick={handleFavorite}>Tin yêu thích</button>
+                                        <button onClick={handleLogout}>Đăng xuất</button>
+                                    </>
                                 ) : (
                                     <>
                                         <Link to="/login" className="menu-link">Đăng nhập</Link>

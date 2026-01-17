@@ -311,7 +311,6 @@ a:hover { color: #005689; }
     gap: 8px;
     z-index: 10;
     background: #fff; 
-    padding-left: 10px;
 }
 
 .swiper-prev, .swiper-next {

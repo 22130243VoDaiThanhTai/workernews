@@ -1,0 +1,147 @@
+
+.nld-ft-wrapper {
+    background-color: #fff;
+    border-top: 1px solid #e5e5e5;
+    padding: 30px 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin-top: 40px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.nld-ft-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.nld-ft-header {
+    margin-bottom: 20px;
+}
+
+.nld-ft-logo-text {
+    font-family: 'Impact', sans-serif; 
+    font-size: 32px;
+    color: #cc0000; 
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+    letter-spacing: 1px;
+}
+
+.nld-ft-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.nld-ft-nav a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.nld-ft-nav a:hover {
+    color: #cc0000;
+}
+
+.nld-ft-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 20px 0;
+}
+
+.nld-ft-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.nld-ft-col {
+    flex: 1;
+}
+
+.nld-ft-col-1 {
+    flex: 1.2;
+}
+
+.nld-ft-heading {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #555;
+    margin: 0 0 10px 0;
+}
+
+.mt-20 { margin-top: 20px; }
+
+.nld-ft-col p {
+    margin: 4px 0;
+    color: #333;
+}
+
+.nld-ft-col strong {
+    color: #000;
+}
+
+.nld-ft-socials {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.nld-social-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.nld-social-btn:hover { opacity: 0.8; }
+
+.nld-social-btn svg { width: 18px; height: 18px; }
+
+.nld-social-btn.fb { background-color: #1877f2; }
+.nld-social-btn.yt { background-color: #ff0000; }
+.nld-social-btn.zl { background-color: #0068ff; }
+.nld-social-btn.rss { background-color: #ee802f; }
+
+.nld-ft-apps {
+    display: flex;
+    gap: 10px;
+}
+
+.nld-ft-apps img {
+    height: 35px; 
+    object-fit: contain;
+    cursor: pointer;
+}
+
+
+.nld-ft-copyright {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nld-ft-body {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .nld-ft-nav {
+        gap: 10px;
+    }
+}

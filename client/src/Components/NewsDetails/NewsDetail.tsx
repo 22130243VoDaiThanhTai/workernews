@@ -125,6 +125,7 @@ function NewsDetail() {
             {parse(detail.content.replace(/(\(NLĐO\).*?)(-)/, '<span class="sapo-bold">$1$2</span>'), parseOptions)}
         </div>
       </div>
+      
     </div>
   );
 }

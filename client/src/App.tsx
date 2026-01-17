@@ -6,6 +6,10 @@ import NewsDetail from './Components/NewsDetails/NewsDetail';
 import ScrollToTop from './Components/Common/ScrollToTop';
 import LoginPage from "./Containers/LoginPage";
 import RegisterPage from "./Containers/RegisterPage";
+import FavoritePage from "./Containers/FavoritePage";
+
+
+
 // Lazy load các container
 const HomePage = React.lazy(() => import('./Containers/HomePage'));
 const DaiHoiDangPage = React.lazy(() => import('./Containers/DaiHoiDangPage'));
@@ -63,7 +67,7 @@ function App() {
 
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
-
+                    <Route path="/favorites" element={<FavoritePage />} />
                 </Routes>
             </Suspense>
             <ScrollToTop />

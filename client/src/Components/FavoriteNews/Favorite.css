@@ -1,0 +1,21 @@
+.news-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.favorite-icon {
+    cursor: pointer;
+    font-size: 16px;
+    color: #ccc;
+    transition: 0.2s;
+}
+
+.favorite-icon:hover {
+    color: gold;
+    transform: scale(1.1);
+}
+
+.favorite-icon.active {
+    color: gold;
+}

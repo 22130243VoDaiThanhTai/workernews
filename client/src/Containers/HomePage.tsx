@@ -63,10 +63,25 @@ const HomePage = () => {
         viewList: []
     });
     const [englishNews, setEnglishNews] = useState<NewsItem[]>([]);
+    const [extraSections, setExtraSections] = useState<any>({});
+    const [exchangeRates, setExchangeRates] = useState<any>(null);
+    const [vietlottData, setVietlottData] = useState<any>(null);
+    const [education, setEducation] = useState<any[]>([]);
+    const [health, setHealth] = useState<any[]>([]);
+    const [sports, setSports] = useState<any[]>([]);
     useEffect(() => {
         const loadData = async () => {
             try {
-                const [dataHome, dataHot, dataVip, dataEnglish] = await Promise.all([
+                const [dataHome, dataHot, dataVip, dataEnglish, dataDocQuyen,
+                    dataXKLD,
+                    dataTaiChinh,
+                    dataPodcast,
+                    dataFlag, 
+                    dataRates,
+                    dataLotto,
+                    dataEducation,
+                    dataHealth, 
+                    dataSports] = await Promise.all([
                     DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
                         signal: "datafetch", 
                         datapage: "home" 
@@ -81,27 +96,67 @@ const HomePage = () => {
                     }),
                     DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
                         signal: "datafetch", 
-                        datapage: "english-news" })
+                        datapage: "english-news" 
+                    }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "doc-quyen" 
+                    }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "xuat-khau-lao-dong" 
+                    }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "tai-chinh-chung-khoan" 
+                    }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "podcast" 
+                    }),
+
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "tu-hao-co-to-quoc" 
+                    }),
+
+                    DataFetch<any, HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "exchange-rate" 
+                    }),
+                    DataFetch<any, HomeRequestPayload>(SERVER_LINK, { 
+                        signal: "datafetch", 
+                        datapage: "vietlott-real" 
+                    }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { signal: "datafetch", datapage: "giao-duc" }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { signal: "datafetch", datapage: "suc-khoe" }),
+                    DataFetch<NewsItem[], HomeRequestPayload>(SERVER_LINK, { signal: "datafetch", datapage: "the-thao" })
                 ]);
+               
 
                 if (dataHome) setNews(dataHome);
                 // Lấy 20 tin nóng để test chức năng cuộn
                 if (dataHot) setTinNong(dataHot.slice(0, 20));
                 if (dataVip) setVipNews(dataVip);
                 if (dataEnglish) setEnglishNews(dataEnglish);
+                if (dataRates) setExchangeRates(dataRates);
+                if (dataLotto) setVietlottData(dataLotto);
+                if (dataEducation) setEducation(dataEducation);
+                if (dataHealth) setHealth(dataHealth);
+                if (dataSports) setSports(dataSports);
                 if (dataHome && dataHome.length > 20) {
                     
                     // 1. Cột trái: Lấy bài từ index 1 đến 10
-                    const leftNews = dataHome.slice(1, 10);
+                    const leftNews = dataHome.slice(1, 20);
                     
                     // 2. Widget Hỏi nóng: Lấy bài index 11
-                    const hoiNong = dataHome[11];
+                    const hoiNong = dataHome[21];
 
                     // 3. Widget Truy vết: Lấy bài index 12 
-                    const truyVet = dataHome[12];
+                    const truyVet = dataHome[22];
 
                     // 4. Xem nhiều: Lấy bài index 13 đến 18
-                    const mostViewed = dataHome.slice(13, 18);
+                    const mostViewed = dataHome.slice(23, 28);
                     
                     setBottomNewsData({
                         newsList: leftNews,
@@ -110,6 +165,13 @@ const HomePage = () => {
                         viewList: mostViewed
                     });
                 }
+                setExtraSections({
+                    exclusive: dataDocQuyen ? dataDocQuyen[0] : null,
+                    labor: dataXKLD ? dataXKLD[0] : null,
+                    finance: dataTaiChinh ? dataTaiChinh[0] : null,
+                    podcastList: dataPodcast || [], // Podcast lấy cả danh sách
+                    flagNews: dataFlag ? dataFlag.slice(0, 2) : []
+                });
             } catch (error) {
                 console.error("Lỗi tải trang chủ:", error);
             }
@@ -263,7 +325,19 @@ const HomePage = () => {
                 perspective={bottomNewsData.truyVet}    // Demo
                 englishNews={englishNews}
                 mostViewed={bottomNewsData.viewList}
+                
+                exclusive={extraSections.exclusive}
+                laborExport={extraSections.labor}
+                finance={extraSections.finance}
+                podcast={extraSections.podcastList}
+                flagNews={extraSections.flagNews}
+                exchangeRates={exchangeRates}
+                vietlottData={vietlottData}
+                education={education}
+                health={health}
+                sports={sports}
             />
+
         </div>
     );
 };

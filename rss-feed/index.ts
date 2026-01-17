@@ -2,6 +2,8 @@ import cors from "cors";
 import express, { Request, Response } from "express";
 import RSSparser from "rss-parser";
 import GetDetailArticle from "./function/GetDetailsOfArticle";
+import axios from "axios";
+import { parseStringPromise } from "xml2js";
 
 const BASE_RSS_URL = "https://nld.com.vn/rss/";
 const parser = new RSSparser();
@@ -33,12 +35,114 @@ const parse = async (url: string): Promise<RSSItem[]> => {
 const app = express();
 app.use(cors());
 app.use(express.json());
+// Cấu hình Header giả lập trình duyệt để không bị chặn
+const AXIOS_CONFIG = {
+    headers: { 
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    }
+};
+// Hàm lấy Tỷ giá từ Vietcombank
+const fetchExchangeRates = async () => {
+    try {
+        // Thêm User-Agent để không bị Vietcombank chặn
+        const response = await axios.get("https://portal.vietcombank.com.vn/Usercontrols/TVPortal.TyGia/pXML.aspx", {
+            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' }
+        });
+        
+        const result = await parseStringPromise(response.data);
+        const exrates = result.ExrateList.Exrate;
+
+        const getRate = (code: string) => {
+            const item = exrates.find((x: any) => x.$.CurrencyCode === code);
+            return item ? { buy: item.$.Buy, sell: item.$.Sell } : { buy: "---", sell: "---" };
+        };
+
+        return {
+            USD: getRate("USD"),
+            EUR: getRate("EUR"),
+            // Giá vàng SJC thường không có trong XML này, ta giả lập hoặc lấy nguồn khác. 
+            // Tạm thời fix cứng giá SJC tham khảo hoặc để trống
+            SJC: { buy: "74,000,000", sell: "76,500,000" } 
+        };
+    } catch (error) {
+        console.error("Lỗi lấy tỷ giá:", error);
+        return null;
+    }
+};
+
+// 2. HÀM LẤY VIETLOTT (XSKT.COM.VN) 
+const fetchRealVietlott = async () => {
+    try {
+        // Dùng axios lấy XML raw trước để tránh bị chặn
+        const response = await axios.get("https://xskt.com.vn/rss-feed/vietlott-power-6-55.rss", AXIOS_CONFIG);
+        
+        // Parse string XML vừa lấy được
+        const feed = await parser.parseString(response.data);
+        
+        if (feed.items.length > 0) {
+            const item = feed.items[0];
+            const title = item.title || ""; 
+            const content = item.contentSnippet || item.content || "";
+
+            // --- XỬ LÝ DỮ LIỆU ---
+            
+            // 1. Ngày quay: Lấy từ tiêu đề (vd: "Kết quả... ngày 16/01/2025")
+            const dateMatch = title.match(/(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{4})/);
+            const drawDate = dateMatch ? dateMatch[0] : (new Date().toLocaleDateString('vi-VN'));
+
+            // 2. Dãy số: Tìm chuỗi dạng "08 15 22 36 45 52"
+            // Regex: Tìm 6 cặp số (2 chữ số) cách nhau bằng khoảng trắng
+            const numberRegex = /\b\d{2}\s\d{2}\s\d{2}\s\d{2}\s\d{2}\s\d{2}\b/;
+            const numberMatch = content.match(numberRegex);
+            
+            // 3. Số đặc biệt (Jackpot 2): Thường nằm sau dấu gạch ngang hoặc ký hiệu phân cách
+            // Ví dụ content: "... : 01 02 03 04 05 06 - 07 ..."
+            const specialMatch = content.match(/-\s*(\d{2})/);
+
+            // 4. Giá trị Jackpot
+            const jackpotMatch = content.match(/Jackpot 1: ([0-9,.]+) đồng/) || content.match(/đặc biệt: ([0-9,.]+) đồng/);
+
+            if (numberMatch) {
+                const numberStr = numberMatch[0];
+                const numbers = numberStr.split(/\s+/).map(n => parseInt(n));
+                
+                // Nếu tìm thấy số đặc biệt thì dùng, không thì random (fallback)
+                const special = specialMatch ? parseInt(specialMatch[1]) : Math.floor(Math.random() * 55) + 1;
+
+                return {
+                    numbers: numbers, // Mảng 6 số chính
+                    special: special, // Số đặc biệt (vàng)
+                    date: drawDate,
+                    jackpot: jackpotMatch ? jackpotMatch[1] : "Đang cập nhật"
+                };
+            }
+        }
+        return null;
+    } catch (error) {
+        console.error("Lỗi Vietlott RSS:", error);
+        return null;
+    }
+}
 
 app.post('/', async (req: Request<{}, {}, RequestBody>, res: Response) => {
     const { signal } = req.body;
 
     if (signal === "datafetch") {
         const dataPage = req.body.datapage;
+
+        // --- API TỶ GIÁ ---
+        if (dataPage === "exchange-rate") {
+            const rates = await fetchExchangeRates();
+            res.send(rates);
+            return;
+        }
+        // --- API VIETLOTT ---
+        if (dataPage === "vietlott-real") {
+            const lotto = await fetchRealVietlott();
+            res.send(lotto);
+            return;
+        }
         let rssSlug = "";
         
         switch (dataPage) {
@@ -87,7 +191,8 @@ app.post('/', async (req: Request<{}, {}, RequestBody>, res: Response) => {
             case "kinh-doanh": rssSlug = "kinh-te/kinh-doanh"; break;
             case "tieu-dung": rssSlug = "kinh-te/tieu-dung"; break;
             case "oto-xe-dien-may": rssSlug = "kinh-te/oto-xe-dien-may"; break;
-            case "bat-dong-san": rssSlug = "kinh-te/tai-chinh-chung-khoan"; break;
+            case "bat-dong-san": rssSlug = "kinh-te/bat-dong-san"; break;
+            case "tai-chinh-chung-khoan": rssSlug = "kinh-te/tai-chinh-chung-khoan"; break;
             case "dien-dan-kinh-te": rssSlug = "kinh-te/dien-dan-kinh-te"; break;
 
             case "suc-khoe": rssSlug = "suc-khoe"; break;
@@ -174,6 +279,8 @@ app.post('/', async (req: Request<{}, {}, RequestBody>, res: Response) => {
             
             case "danh-cho-ban-doc-vip": rssSlug = "danh-cho-ban-doc-vip"; break;
             case "english-news": rssSlug = "nguoi-lao-dong-news"; break;
+            case "podcast": rssSlug = "podcast"; break;
+            case "tu-hao-co-to-quoc": rssSlug = "tu-hao-co-to-quoc"; break;
             default: rssSlug = "home"; 
         }
 

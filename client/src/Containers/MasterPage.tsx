@@ -4,7 +4,6 @@ import DataFetch from '../Components/fetchRSS/DataFetch';
 import './Page.css';
 import UniversalSidebar from '../Components/Sidebar/GeneralSidebar';
 import MENU_CONFIG from '../Config/MenuConfig'; 
-
 const SERVER_LINK = "http://localhost:4000/";
 
 interface RSSContent { title: string; link: string; description?: string; content?: string; contentSnippet?: string; enclosure?: { url: string }; pubDate: string; }
@@ -238,6 +237,7 @@ function MasterPage() {
                     </div>
                 </>
             )}
+
         </div>
     );
 }

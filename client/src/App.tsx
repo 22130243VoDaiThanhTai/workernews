@@ -1,7 +1,7 @@
 import React, { Suspense, useLayoutEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './Components/Common/Header';
-// import Footer from './Components/Common/Footer';
+import Footer from './Components/Common/Footer';
 import NewsDetail from './Components/NewsDetails/NewsDetail';
 import ScrollToTop from './Components/Common/ScrollToTop';
 import LoginPage from "./Containers/LoginPage";
@@ -67,7 +67,7 @@ function App() {
                 </Routes>
             </Suspense>
             <ScrollToTop />
-            {/* <Footer /> */}
+            <Footer />
         </div>
     );
 }

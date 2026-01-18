@@ -1,11 +1,19 @@
-
 .home-vip-section {
     background-color: #dcf4fc; 
     padding: 25px 0;
     margin-top: 30px;
+
     border-top: 1px solid #cceeff;
     border-bottom: 1px solid #cceeff;
+    
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+[data-theme='dark'] .home-vip-section {
+    background-color: #252a34; 
+    border-top-color: #333;
+    border-bottom-color: #333;
 }
 
 .vip-container {
@@ -25,6 +33,10 @@
     border-bottom: 1px solid rgba(0, 91, 178, 0.15);
 }
 
+[data-theme='dark'] .vip-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
 .vip-header-left {
     display: flex;
     flex-direction: column;
@@ -42,6 +54,7 @@
     gap: 10px;
 }
 
+
 .vip-icon {
     font-size: 24px;
 }
@@ -53,6 +66,10 @@
     margin-left: 38px;
     font-style: italic;
     line-height: 1.2;      
+}
+
+[data-theme='dark'] .vip-note {
+    color: #a0a0a0;
 }
  
 .btn-reg-vip {
@@ -103,15 +120,6 @@
     cursor: -webkit-grabbing;
 }
 
-.vip-list-scroll::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 10px;
-}
-
-.vip-list-scroll::-webkit-scrollbar-track {
-    background: transparent;
-}
-
 .vip-item {
     width: 260px;
     flex-shrink: 0;
@@ -158,7 +166,7 @@
 
 .vip-item-title a {
     text-decoration: none;
-    color: #333;
+    color: #333; 
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -167,8 +175,16 @@
     user-drag: none;
 }
 
+[data-theme='dark'] .vip-item-title a {
+    color: #e0e0e0;
+}
+
 .vip-item-title a:hover {
     color: #005689;
+}
+
+[data-theme='dark'] .vip-item-title a:hover {
+    color: #66b2ff;
 }
 
 @media (max-width: 768px) {
@@ -187,4 +203,39 @@
     .vip-thumb img {
         height: 140px;
     }
+}
+
+.swiper-scrollbar {
+    position: relative;
+    width: 213px;
+    margin: 0 auto;
+    margin-top: 28px;
+    background: #f4f4f4;
+}
+.swiper-horizontal>.swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal {
+    position: absolute;
+    left: 1%;
+    bottom: 3px;
+    z-index: 50;
+    height: 5px;
+    width: 98%;
+}
+.swiper-scrollbar {
+    border-radius: 10px;
+    position: relative;
+    -ms-touch-action: none;
+    background: rgba(0, 0, 0, .1);
+}
+.swiper-scrollbar-drag {
+    background: #005bb2;
+    transform: translate3d(0px, 0px, 0px);
+    transition-duration: 0ms;
+    width: 54.6223px;
+}
+.swiper-scrollbar-drag {
+    height: 100%;
+    position: relative;
+    border-radius: 10px;
+    left: 0;
+    top: 0;
 }

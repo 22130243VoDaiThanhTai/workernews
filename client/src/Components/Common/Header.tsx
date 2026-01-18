@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { FaHome, FaSearch, FaUserCircle, FaFacebook, FaYoutube, FaRss, FaEllipsisH, FaTimes } from "react-icons/fa";
+import { FaHome, FaSearch, FaUserCircle, FaFacebook, FaYoutube, FaRss, FaEllipsisH, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { SiZalo } from "react-icons/si";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
 import ExpandedMenu from "./ExpandedMenu";
 
-function Header() {
+interface HeaderProps {
+    theme: string;
+    toggleTheme: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
     const date: Date = new Date();
     const daysOfWeek: string[] = ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"];
     const dateString: string = `${daysOfWeek[date.getDay()]}, ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
@@ -134,6 +139,15 @@ function Header() {
                     </div>
 
                     <div className="actions-section">
+                        {/* [MỚI] NÚT CHUYỂN ĐỔI GIAO DIỆN SÁNG/TỐI */}
+                        <button 
+                            onClick={toggleTheme} 
+                            className="btn-theme-toggle" 
+                            title="Chế độ Sáng/Tối"
+                        >
+                            {theme === 'light' ? <FaMoon size={18} /> : <FaSun size={18} color="#FFD700" />}
+                        </button>
+                        {/* ------------------------------------------- */}
                         <div className="user-dropdown">
                             {currentUser ? (
                                 <span className="user-name">

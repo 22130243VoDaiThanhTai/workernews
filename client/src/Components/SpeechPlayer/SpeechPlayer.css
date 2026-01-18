@@ -1,16 +1,18 @@
-
 .sp-container {
     display: flex;
     align-items: center;
-    background-color: #f4f4f4; 
+    background-color: var(--hover-bg); 
+    
     padding: 6px 12px;
     border-radius: 4px;
     width: fit-content;
     margin-top: 15px;
     margin-bottom: 20px;
     font-family: Arial, sans-serif;
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color); 
+    
     user-select: none; 
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .sp-left-section {
@@ -18,7 +20,8 @@
     align-items: center;
     cursor: pointer;
     padding-right: 15px;
-    border-right: 1px solid #ccc; 
+    border-right: 1px solid var(--border-color); 
+    
     transition: opacity 0.2s;
 }
 
@@ -29,7 +32,8 @@
 .sp-play-btn {
     background: none;
     border: none;
-    color: #333;
+    color: var(--text-primary); 
+    
     font-size: 12px;
     margin-right: 8px;
     cursor: pointer;
@@ -38,7 +42,8 @@
 
 .sp-text-label {
     font-size: 13px;
-    color: #333;
+    color: var(--text-primary); 
+    
     font-weight: bold;
 }
 
@@ -50,13 +55,19 @@
     border: none;
     background: transparent;
     font-size: 13px;
-    color: #555;
+    color: var(--text-secondary); 
+    
     cursor: pointer;
     outline: none;
     font-weight: bold;
     padding: 2px;
 }
 
+.sp-select-box option {
+    background-color: var(--bg-content);
+    color: var(--text-primary);
+}
+
 .sp-select-box:hover {
-    color: #000;
+    color: var(--text-primary); 
 }

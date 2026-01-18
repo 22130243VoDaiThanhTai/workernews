@@ -1,4 +1,4 @@
-import React, { useRef, useState, MouseEvent } from 'react';
+import React, { useRef, useState, MouseEvent, useEffect } from 'react';
 import './VipReaderSection.css';
 
 interface VipSectionProps {
@@ -12,23 +12,68 @@ const getImgSrc = (content: string | undefined): string => {
 };
 
 const VipReaderSection: React.FC<VipSectionProps> = ({ data }) => {
-    const sliderRef = useRef<HTMLDivElement>(null);
+    const sliderRef = useRef<HTMLDivElement>(null);      
+    const scrollbarRef = useRef<HTMLDivElement>(null);   
+    const dragRef = useRef<HTMLDivElement>(null);        
+
     const [isDown, setIsDown] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
 
+    const updateScrollbar = () => {
+        if (!sliderRef.current || !dragRef.current || !scrollbarRef.current) return;
+
+        const container = sliderRef.current;
+        const track = scrollbarRef.current;
+        const thumb = dragRef.current;
+
+        const contentWidth = container.scrollWidth;
+        const visibleWidth = container.clientWidth;
+
+        if (contentWidth <= visibleWidth) {
+            thumb.style.width = "100%";
+            thumb.style.transform = `translate3d(0px, 0px, 0px)`;
+            return;
+        }
+
+        const trackWidth = track.clientWidth;
+        // Tỷ lệ độ rộng cục trượt
+        const thumbWidth = (visibleWidth / contentWidth) * trackWidth;
+        thumb.style.width = `${thumbWidth}px`;
+
+        // Tính vị trí trượt
+        const maxScrollLeft = contentWidth - visibleWidth; // Quãng đường tối đa cuộn được
+        const currentScroll = container.scrollLeft;        // Vị trí hiện tại
+        
+        // Tỷ lệ đã cuộn (từ 0 đến 1)
+        const scrollRatio = currentScroll / maxScrollLeft;
+
+        // Quãng đường tối đa cục trượt có thể đi trong track
+        const maxThumbTravel = trackWidth - thumbWidth;
+        
+        // Vị trí mới của cục trượt
+        const thumbPosition = scrollRatio * maxThumbTravel;
+        thumb.style.transform = `translate3d(${thumbPosition}px, 0, 0)`;
+    };
+
+
+    useEffect(() => {
+        updateScrollbar();
+        window.addEventListener('resize', updateScrollbar);
+        return () => window.removeEventListener('resize', updateScrollbar);
+    }, [data]);
+
+
     if (!data || data.length === 0) return null;
 
-    // Khi nhấn chuột 
     const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
         if (!sliderRef.current) return;
         setIsDown(true);
-        sliderRef.current.classList.add('active'); // Thêm class để đổi con trỏ chuột
+        sliderRef.current.classList.add('active');
         setStartX(e.pageX - sliderRef.current.offsetLeft);
         setScrollLeft(sliderRef.current.scrollLeft);
     };
 
-    // Khi chuột rời khỏi khu vực hoặc thả chuột ra
     const handleMouseLeaveOrUp = () => {
         setIsDown(false);
         if (sliderRef.current) {
@@ -36,10 +81,9 @@ const VipReaderSection: React.FC<VipSectionProps> = ({ data }) => {
         }
     };
 
-    // Khi di chuyển chuột (kéo)
     const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
         if (!isDown || !sliderRef.current) return;
-        e.preventDefault(); 
+        e.preventDefault();
         const x = e.pageX - sliderRef.current.offsetLeft;
         const walk = (x - startX) * 2; 
         sliderRef.current.scrollLeft = scrollLeft - walk;
@@ -68,6 +112,7 @@ const VipReaderSection: React.FC<VipSectionProps> = ({ data }) => {
                         onMouseLeave={handleMouseLeaveOrUp}
                         onMouseUp={handleMouseLeaveOrUp}
                         onMouseMove={handleMouseMove}
+                        onScroll={updateScrollbar} 
                     >
                         {data.map((item, index) => (
                             <div key={index} className="vip-item">
@@ -85,8 +130,13 @@ const VipReaderSection: React.FC<VipSectionProps> = ({ data }) => {
                             </div>
                         ))}
                     </div>
+                    
+                    {/* THANH SCROLLBAR */}
+                    <div className="swiper-scrollbar swiper-scrollbar-horizontal" ref={scrollbarRef}>
+                        <div className="swiper-scrollbar-drag" ref={dragRef}></div>
+                    </div>
                 </div>
-
+                
             </div>
         </div>
     );

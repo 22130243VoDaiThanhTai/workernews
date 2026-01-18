@@ -1,13 +1,14 @@
 
 .nld-ft-wrapper {
-    background-color: #fff;
-    border-top: 1px solid #e5e5e5;
+    background-color: var(--bg-content); 
+    border-top: 1px solid var(--border-color); 
     padding: 30px 0;
     font-family: Arial, sans-serif;
-    color: #333;
+    color: var(--text-primary); 
     margin-top: 40px;
     font-size: 13px;
     line-height: 1.6;
+    transition: background-color 0.3s ease;
 }
 
 .nld-ft-container {
@@ -38,19 +39,19 @@
 
 .nld-ft-nav a {
     text-decoration: none;
-    color: #444;
+    color: var(--text-secondary); 
     font-weight: 600;
     font-size: 14px;
     text-transform: capitalize;
 }
 
 .nld-ft-nav a:hover {
-    color: #cc0000;
+    color: var(--text-link);
 }
 
 .nld-ft-divider {
     height: 1px;
-    background-color: #eee;
+    background-color: var(--border-color); 
     margin: 20px 0;
 }
 
@@ -72,7 +73,7 @@
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #555;
+    color: var(--text-secondary); 
     margin: 0 0 10px 0;
 }
 
@@ -80,11 +81,11 @@
 
 .nld-ft-col p {
     margin: 4px 0;
-    color: #333;
+    color: var(--text-primary); 
 }
 
 .nld-ft-col strong {
-    color: #000;
+    color: var(--text-primary); 
 }
 
 .nld-ft-socials {
@@ -100,7 +101,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: #fff; 
     text-decoration: none;
     transition: opacity 0.2s;
 }
@@ -125,13 +126,12 @@
     cursor: pointer;
 }
 
-
 .nld-ft-copyright {
     margin-top: 30px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border-color); 
     padding-top: 15px;
     text-align: center;
-    color: #777;
+    color: var(--text-secondary); 
     font-size: 12px;
 }
 

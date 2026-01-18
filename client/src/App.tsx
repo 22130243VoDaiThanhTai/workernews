@@ -1,4 +1,4 @@
-import React, { Suspense, useLayoutEffect } from 'react';
+import React, { Suspense, useLayoutEffect, useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './Components/Common/Header';
 import Footer from './Components/Common/Footer';
@@ -19,7 +19,22 @@ const MasterPage = React.lazy(() => import('./Containers/MasterPage'));
 
 function App() {
     const navigate = useNavigate();
+    // --- 1. LOGIC DARK/LIGHT MODE (MỚI THÊM) ---
+    // Khởi tạo state từ localStorage hoặc mặc định là 'light'
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
+    // Hàm chuyển đổi theme
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+    };
+
+    // Cập nhật attribute 'data-theme' cho thẻ HTML mỗi khi theme thay đổi
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+    // -------------------------------------------
     useLayoutEffect(() => {
         const handleLinkClick = (event: MouseEvent) => {
             const target = event.target as HTMLElement;
@@ -50,8 +65,10 @@ function App() {
     }, [navigate]);
   
     return (
-        <div>
-            <Header />
+        <div className="app-container">
+            {/* Truyền props theme và toggleTheme vào Header */}
+            <Header theme={theme} toggleTheme={toggleTheme} />
+            
             <Suspense fallback={<div style={{padding:'20px', textAlign:'center'}}>Đang tải...</div>}>
                 <Routes>
 

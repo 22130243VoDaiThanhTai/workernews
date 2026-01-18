@@ -1,15 +1,20 @@
+
 .auth-container {
     max-width: 400px;
     margin: 60px auto;
     padding: 24px;
-    background: #fff;
+    background: var(--bg-content); 
+    color: var(--text-primary);
+    
     border-radius: 6px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border: 1px solid var(--border-color);
 }
 
 .auth-container h2 {
     text-align: center;
     margin-bottom: 20px;
+    color: var(--text-primary); 
 }
 
 .auth-container form {
@@ -21,8 +26,17 @@
 .auth-container input {
     padding: 10px;
     font-size: 14px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color); 
+    background-color: var(--bg-body);      
+    color: var(--text-primary);           
+    
     border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.auth-container input:focus {
+    border-color: #0a5db3; 
 }
 
 .auth-container button {
@@ -34,6 +48,7 @@
     border-radius: 4px;
     cursor: pointer;
     font-weight: 600;
+    transition: background 0.2s;
 }
 
 .auth-container button:hover {
@@ -44,9 +59,23 @@
     text-align: center;
     margin-top: 16px;
     font-size: 14px;
+    color: var(--text-secondary); 
 }
 
 .auth-container a {
     color: #0a5db3;
     text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-container a:hover {
+    text-decoration: underline;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px var(--bg-body) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
 }

@@ -1,44 +1,40 @@
-/* dung lam css chung cho cac trang danh muc */
-
 .thoisu-container {
     max-width: 1200px; 
     margin: 0 auto;
     padding: 20px 0;
-    /* Font mặc định dự phòng */
     font-family: 'Roboto', sans-serif; 
+    color: var(--text-primary);
 }
 
 /* --- HEADER: TIÊU ĐỀ & MENU --- */
 .section-header {
     display: flex;
     align-items: baseline;  
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color);
     margin-bottom: 20px;
 }
 
-/* Tiêu đề lớn vd: "Thời sự" */
 .section-title {
     font-family: 'Merriweather', serif; 
     font-size: 34px; 
     font-weight: 900; 
-    color: #222;  
+    color: var(--text-primary); 
     margin: 0;
     margin-right: 0;
     text-transform: none;  
     line-height: 1;
 }
 
-/* Menu con (Chính trị, Xã hội...) */
 .sub-nav {
     display: flex;
-    gap: 25px; /* Khoảng cách giữa các mục */
-    margin-left: 30px; /* Cách tiêu đề Thời sự ra */
+    gap: 25px; 
+    margin-left: 30px;
 }
 
 .sub-nav a {
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
-    color: #666;
+    color: var(--text-secondary);
     font-size: 15px;
     font-weight: 600;
     padding-bottom: 8px;
@@ -47,22 +43,21 @@
 }
 
 .sub-nav a:hover { 
-    color: #0056b3; 
+    color: var(--text-link);
 }
 
-/* Class Active: Khi mục được chọn (Màu xanh + Đậm hơn) */
 .sub-nav a.active-link {
-    color: #0056b3; 
+    color: var(--text-link); 
     font-weight: 900;
-
 }
 
-/* --- PHẦN TIN NỔI BẬT --- */
 .hero-wrapper {
     display: flex;
     gap: 30px;
     margin-bottom: 30px;
-    background-color: #f7f7f7;  
+    
+    background-color: var(--hover-bg);
+    
     padding: 0; 
 }
 
@@ -85,20 +80,25 @@
 }
 
 .hero-info h3 {
-    font-family: 'Merriweather', serif; /* Font tiêu đề bài báo */
+    font-family: 'Merriweather', serif; 
     font-size: 28px;
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 15px;
     letter-spacing: -0.3px;
 }
-.hero-info h3 a { text-decoration: none; color: #333; }
-.hero-info h3 a:hover { color: #0056b3; }
+.hero-info h3 a { 
+    text-decoration: none; 
+    color: var(--text-primary); 
+}
+.hero-info h3 a:hover { 
+    color: var(--text-link); 
+}
 
 .hero-info p { 
-    font-family: 'Roboto', sans-serif; /* Font mô tả */
+    font-family: 'Roboto', sans-serif;
     font-size: 15px; 
-    color: #555; 
+    color: var(--text-secondary); 
     line-height: 1.5; 
 }
 
@@ -119,18 +119,23 @@
     border-radius: 3px;
 }
 .sub-card h4 {
-    font-family: 'Merriweather', serif; /* Font tiêu đề */
+    font-family: 'Merriweather', serif;
     font-size: 16px;
     font-weight: 700;
     line-height: 1.4;
     margin: 0;
 }
-.sub-card h4 a { text-decoration: none; color: #333; }
-.sub-card h4 a:hover { color: #0056b3; }
+.sub-card h4 a { 
+    text-decoration: none; 
+    color: var(--text-primary); 
+}
+.sub-card h4 a:hover { 
+    color: var(--text-link); 
+}
 
 .divider-line {
     height: 1px;
-    background: #e5e5e5;
+    background: var(--border-color);
     margin: 30px 0;
 }
 
@@ -139,7 +144,7 @@
     display: flex;
     gap: 20px;
     padding: 20px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color); 
 }
 .news-thumb { 
     width: 240px; 
@@ -154,7 +159,7 @@
     flex: 1; 
 }
 .news-title { 
-    font-family: 'Merriweather', serif; /* Font tiêu đề */
+    font-family: 'Merriweather', serif; 
     font-size: 18px; 
     margin-bottom: 10px; 
     font-weight: bold; 
@@ -162,26 +167,25 @@
 }
 .news-title a { 
     text-decoration: none; 
-    color: #333; 
+    color: var(--text-primary); 
 }
 .news-title a:hover {
-    color: #0056b3;
+    color: var(--text-link); 
 }
 
 .news-sapo { 
-    font-family: 'Roboto', sans-serif; /* Font mô tả */
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    color: #666; 
+    color: var(--text-secondary); 
     margin-bottom: 10px; 
     line-height: 1.5; 
 }
 .news-meta { 
     font-family: 'Roboto', sans-serif;
     font-size: 12px; 
-    color: #999; 
+    color: var(--text-secondary);
 }
 
-/* --- NÚT XEM THÊM --- */
 .load-more-container {
     text-align: center;
     margin-top: 20px;
@@ -189,9 +193,10 @@
 }
 
 .btn-load-more {
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-    color: #757272;  
+    background-color: var(--bg-content); 
+    border: 1px solid var(--border-color); 
+    color: var(--text-secondary);   
+    
     padding: 10px 40px;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -209,24 +214,22 @@
     border-color: #3202d0;
 }
 
-/* --- LAYOUT 2 CỘT --- */
 .thoisu-body-flex {
     display: flex;
-    gap: 40px; /* Khoảng cách giữa 2 cột */
+    gap: 40px; 
     align-items: flex-start;
 }
 
 .main-column {
-    flex: 2.5; /* Cột tin chính chiếm 2.5 phần (khoảng 70%) */
+    flex: 2.5; 
 }
 
 .right-sidebar {
-    flex: 1; /* Cột sidebar chiếm 1 phần (khoảng 30%) */
-    position: sticky; /* (Tuỳ chọn) Giữ sidebar khi cuộn */
+    flex: 1; 
+    position: sticky; 
     top: 20px;
 }
 
-/* Responsive: Trên điện thoại thì cho rớt dòng */
 @media (max-width: 768px) {
     .thoisu-body-flex {
         flex-direction: column;

@@ -37,12 +37,21 @@ const VipReaderSection: React.FC<VipSectionProps> = ({ data }) => {
         }
 
         const trackWidth = track.clientWidth;
+        // Tỷ lệ độ rộng cục trượt
         const thumbWidth = (visibleWidth / contentWidth) * trackWidth;
         thumb.style.width = `${thumbWidth}px`;
-        const maxScrollLeft = contentWidth - visibleWidth; 
-        const currentScroll = container.scrollLeft;       
+
+        // Tính vị trí trượt
+        const maxScrollLeft = contentWidth - visibleWidth; // Quãng đường tối đa cuộn được
+        const currentScroll = container.scrollLeft;        // Vị trí hiện tại
+        
+        // Tỷ lệ đã cuộn (từ 0 đến 1)
         const scrollRatio = currentScroll / maxScrollLeft;
+
+        // Quãng đường tối đa cục trượt có thể đi trong track
         const maxThumbTravel = trackWidth - thumbWidth;
+        
+        // Vị trí mới của cục trượt
         const thumbPosition = scrollRatio * maxThumbTravel;
         thumb.style.transform = `translate3d(${thumbPosition}px, 0, 0)`;
     };

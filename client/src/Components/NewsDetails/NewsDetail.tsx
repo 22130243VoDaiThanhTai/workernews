@@ -6,6 +6,7 @@ import { useLocation, Link } from 'react-router-dom';
 import GetDetailArticle, { ArticleDetail } from "../fetchRSS/GetDetailArticle";
 import "./NewsDetail.css";
 import SpeechPlayer from "../SpeechPlayer/SpeechPlayer";
+import { addToViewedHistory } from '../../Utils/historyUtils';
 
 const SERVER_LINK = "http://localhost:4000";
 
@@ -33,6 +34,23 @@ function NewsDetail() {
     };
     fetchData();
   }, [link]); 
+
+  // Lưu vào lịch sử khi có dữ liệu (detail)
+  useEffect(() => {
+    if (detail && link) {
+      // Chuẩn bị object để lưu
+      const itemToSave = {
+        title: detail.title,           // Tiêu đề
+        link: link,                    // Link gốc
+        content: detail.content,       // Dùng để trích xuất ảnh thumbnail
+        sapo: detail.category || "Tin tức", // Dùng category làm sapo tạm nếu không có sapo riêng
+        // Nếu API trả về sapo/contentSnippet riêng thì dùng: detail.sapo 
+      };
+
+      // lưu
+      addToViewedHistory(itemToSave);
+    }
+  }, [detail, link]); // Chạy mỗi khi detail hoặc link thay đổi
 
   const parseOptions = {
     replace: (domNode: any) => {

@@ -7,7 +7,7 @@ import ScrollToTop from './Components/Common/ScrollToTop';
 import LoginPage from "./Containers/LoginPage";
 import RegisterPage from "./Containers/RegisterPage";
 import FavoritePage from "./Containers/FavoritePage";
-
+import ViewedNews from "./Containers/ViewedNews";
 
 
 // Lazy load các container
@@ -19,7 +19,7 @@ const MasterPage = React.lazy(() => import('./Containers/MasterPage'));
 
 function App() {
     const navigate = useNavigate();
-    // --- 1. LOGIC DARK/LIGHT MODE (MỚI THÊM) ---
+    // --- 1. LOGIC DARK/LIGHT MODE ---
     // Khởi tạo state từ localStorage hoặc mặc định là 'light'
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
@@ -85,6 +85,7 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/favorites" element={<FavoritePage />} />
+                    <Route path="/tin-da-xem" element={<ViewedNews />} />
                 </Routes>
             </Suspense>
             <ScrollToTop />

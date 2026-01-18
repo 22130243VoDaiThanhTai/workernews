@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaHome, FaSearch, FaUserCircle, FaFacebook, FaYoutube, FaRss, FaEllipsisH, FaTimes, FaSun, FaMoon } from "react-icons/fa";
+import { FaHome, FaSearch, FaUserCircle, FaFacebook, FaYoutube, FaRss, FaEllipsisH, FaTimes, FaSun, FaMoon, FaHistory } from "react-icons/fa";
 import { SiZalo } from "react-icons/si";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
@@ -106,6 +106,10 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                         <Link to="/tin-24h" className="top-link">
                             <span className="icon-prefix">🔔</span> 24h qua
                         </Link>
+                        <Link to="/tin-da-xem" className="top-link-item" title="Lịch sử đọc tin">
+                            <FaHistory style={{ marginRight: '4px', verticalAlign: 'middle' }} /> 
+                                Tin đã xem
+                        </Link>
                         <div className="social-icons">
                             <a href="https://www.facebook.com/nguoilaodong" className="social-icon fb" target="_blank"><FaFacebook /></a>
                             <a href="https://www.youtube.com/channel/UCzkyOx_0O1pGOqHiUMOe2KQ?sub_confirmation=1" className="social-icon yt"><FaYoutube /></a>
@@ -139,7 +143,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                     </div>
 
                     <div className="actions-section">
-                        {/* [MỚI] NÚT CHUYỂN ĐỔI GIAO DIỆN SÁNG/TỐI */}
+                        {/* NÚT CHUYỂN ĐỔI GIAO DIỆN SÁNG/TỐI */}
                         <button 
                             onClick={toggleTheme} 
                             className="btn-theme-toggle" 

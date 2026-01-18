@@ -1,5 +1,3 @@
-/* HomePage.css - Đã hỗ trợ chế độ Sáng/Tối */
-
 .home_container {
     width: 1240px;
     max-width: 100%;
@@ -7,8 +5,7 @@
     padding: 0 15px;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
-    /* [QUAN TRỌNG] Đổi màu nền và màu chữ theo theme */
+
     background-color: var(--bg-body); 
     color: var(--text-primary);
 }
@@ -29,7 +26,6 @@
     display: flex;
     gap: 20px;
     padding-bottom: 20px;
-    /* Thay màu viền cứng bằng biến */
     border-bottom: 1px solid var(--border-color); 
 }
 
@@ -53,7 +49,7 @@
 .bottom-item-col {
     width: 33.33%; 
     padding: 0 15px;
-    border-right: 1px solid var(--border-color); /* Thay #e5e5e5 */
+    border-right: 1px solid var(--border-color); 
     display: flex;
     flex-direction: column;
 }
@@ -72,12 +68,10 @@
     width: 320px;
     padding-left: 20px;
     flex-shrink: 0; 
-    /* Nếu muốn sidebar có nền riêng trong dark mode thì mở comment dưới */
-    /* background-color: var(--bg-content); */
 }
 
 .sidebar-header {
-    border-bottom: 2px solid var(--border-color); /* Thay #ddd */
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 8px;
     margin-bottom: 15px;
 }
@@ -87,7 +81,7 @@
     font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
-    color: var(--text-primary); /* Thay #181717 */
+    color: var(--text-primary); 
 }
 
 .sidebar-content.scroll-box {
@@ -97,22 +91,21 @@
     padding-right: 5px; 
 }
 
-/* Tùy chỉnh thanh cuộn cho Sidebar */
 .sidebar-content.scroll-box::-webkit-scrollbar {
     width: 4px;
 }
 
 .sidebar-content.scroll-box::-webkit-scrollbar-track {
-    background: var(--hover-bg); /* Thay #f1f1f1 */
+    background: var(--hover-bg);
 }
 
 .sidebar-content.scroll-box::-webkit-scrollbar-thumb {
-    background: var(--border-color); /* Thay #ccc */
+    background: var(--border-color); 
     border-radius: 4px;
 }
 
 .sidebar-content.scroll-box::-webkit-scrollbar-thumb:hover {
-    background: var(--text-secondary); /* Thay #999 */
+    background: var(--text-secondary); 
 }
 
 .list-news-text {
@@ -126,7 +119,7 @@
 .list-news-text li {
     padding-bottom: 12px;
     margin-bottom: 12px;
-    border-bottom: 1px solid var(--border-color); /* Thay #f0f0f0 */
+    border-bottom: 1px solid var(--border-color); 
 }
 
 .list-news-text li:last-child {
@@ -135,7 +128,7 @@
 
 .list-news-text li a {
     font-size: 15px;
-    color: var(--text-primary); /* Thay #333 */
+    color: var(--text-primary); 
     line-height: 1.4;
     text-decoration: none;
     font-weight: 500;
@@ -143,12 +136,12 @@
 }
 
 .list-news-text li a:hover {
-    color: var(--text-link); /* Thay #005689 */
+    color: var(--text-link); 
 }
 
 
 a { 
-    color: var(--text-primary); /* Thay #000 */
+    color: var(--text-primary);
     text-decoration: none; 
     transition: 0.2s; 
 }
@@ -163,7 +156,7 @@ a:hover {
     line-height: 1.3;
     margin-top: 0;
     margin-bottom: 10px;
-    color: var(--text-primary); /* Đảm bảo tiêu đề đổi màu */
+    color: var(--text-primary); 
 }
 
 .main-thumb img {
@@ -176,12 +169,12 @@ a:hover {
 
 .main-sapo {
     font-size: 15px;
-    color: var(--text-secondary); /* Thay #444 */
+    color: var(--text-secondary); 
     line-height: 1.5;
 }
 .prefix { 
     font-weight: bold; 
-    color: var(--text-secondary); /* Thay #555 */
+    color: var(--text-secondary); 
 }
 
 .sub-article { display: flex; flex-direction: column; }
@@ -214,7 +207,7 @@ a:hover {
 
 .bottom-sapo {
     font-size: 13px;
-    color: var(--text-secondary); /* Thay #555 */
+    color: var(--text-secondary); 
     margin: 0;
     line-height: 1.5;
     display: -webkit-box;
@@ -244,23 +237,22 @@ a:hover {
     .bottom-item-col {
         width: 100%;
         border-right: none;
-        border-bottom: 1px solid var(--border-color); /* Thay #eee */
+        border-bottom: 1px solid var(--border-color); 
         padding: 0 0 15px 0 !important;
     }
 
     .home_top_section { border-bottom: none; }
 }
 
-/* Thanh Trending (Swiper Section) */
 .home__trending_bar {
     display: flex;
     align-items: center;
     padding: 15px 0;
     margin-bottom: 20px;
-    border-top: 1px solid var(--border-color); /* Thay #e5e5e5 */
+    border-top: 1px solid var(--border-color); 
     border-bottom: 1px solid var(--border-color);
     position: relative;
-    background-color: var(--bg-content); /* Đảm bảo nền đổi màu */
+    background-color: var(--bg-content); 
 }
 
 .home__trending_bar .label {
@@ -275,7 +267,7 @@ a:hover {
     justify-content: center;
     width: 30px;
     height: 30px;
-    background-color: #d71920; /* Giữ màu đỏ thương hiệu */
+    background-color: #d71920; 
     border-radius: 4px;
 }
 
@@ -309,8 +301,8 @@ a:hover {
 .box-category-link-title {
     display: inline-block;
     padding: 6px 12px;
-    background-color: var(--hover-bg); /* Thay #f5f5f5 */
-    color: var(--text-primary); /* Thay #333 */
+    background-color: var(--hover-bg);
+    color: var(--text-primary);
     font-size: 14px;
     font-weight: 500;
     border-radius: 4px;
@@ -321,8 +313,8 @@ a:hover {
 }
 
 .box-category-link-title:hover {
-    background-color: var(--border-color); /* Thay #e0e0e0 */
-    color: #d71920; /* Giữ hover đỏ */
+    background-color: var(--border-color); 
+    color: #d71920;
 }
 
 .home-treding-sw-control {
@@ -333,7 +325,6 @@ a:hover {
     display: flex;
     gap: 8px;
     z-index: 10;
-    /* Dùng biến nền để che chữ trôi qua phía dưới */
 
     padding-left: 10px;
 }
@@ -346,8 +337,6 @@ a:hover {
     align-items: center;
     justify-content: center;
     transition: opacity 0.3s;
-    
-    /* XÓA BỎ NỀN VÀ VIỀN */
     background-color: transparent !important;
     border: none !important;
 }
@@ -358,14 +347,13 @@ a:hover {
     cursor: default;
 }
 
-/* Đổi màu mũi tên SVG */
 .swiper-prev svg, .swiper-next svg {
     width: 100%;
     height: 100%;
     fill: #ffffff; 
     transition: fill 0.2s;
 }
-/* Dark Mode: Mũi tên chuyển sang màu trắng */
+
 [data-theme='dark'] .swiper-prev svg,
 [data-theme='dark'] .swiper-next svg {
     fill: #fff;
@@ -397,22 +385,22 @@ a:hover {
 }
 
 .scroll-box::-webkit-scrollbar-track {
-    background: var(--hover-bg); /* Thay #f1f1f1 */
+    background: var(--hover-bg);
     border-radius: 3px;
 }
 
 .scroll-box::-webkit-scrollbar-thumb {
-    background: var(--border-color); /* Thay #ccc */
+    background: var(--border-color); 
     border-radius: 3px;
 }
 
 .scroll-box::-webkit-scrollbar-thumb:hover {
-    background: var(--text-secondary); /* Thay #999 */
+    background: var(--text-secondary); 
 }
 
 .banner-dhd {
     margin-top: 20px;
-    border-top: 1px solid var(--border-color); /* Thay #eee */
+    border-top: 1px solid var(--border-color);
     padding-top: 20px;
     text-align: center;
 }

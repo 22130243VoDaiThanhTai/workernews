@@ -137,7 +137,7 @@ const HomePage = () => {
                 if (dataHome) setNews(dataHome);
                 // Lấy 20 tin nóng để test chức năng cuộn
                 if (dataHot) setTinNong(dataHot.slice(0, 20));
-                if (dataVip) setVipNews(dataVip);
+                if (dataVip) setVipNews(dataVip.slice(0, 15));
                 if (dataEnglish) setEnglishNews(dataEnglish);
                 if (dataRates) setExchangeRates(dataRates);
                 if (dataLotto) setVietlottData(dataLotto);

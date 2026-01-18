@@ -4,6 +4,7 @@ import MENU_CONFIG from '../../Config/MenuConfig';
 import { FaPlayCircle, FaCamera, FaChartBar, FaFileAlt, FaFacebookF, FaYoutube, FaRss, FaTimes } from 'react-icons/fa';
 import { SiZalo } from 'react-icons/si';
 import './ExpandedMenu.css';
+import { FaHistory } from 'react-icons/fa';
 
 interface ExpandedMenuProps {
     isOpen: boolean;
@@ -100,6 +101,11 @@ const ExpandedMenu: React.FC<ExpandedMenuProps> = ({ isOpen, onClose }) => {
                             <li className="sidebar-link-item">
                                 <Link to="/tin-24h" className="sidebar-text-link" onClick={onClose}>
                                     🔔 24h qua
+                                </Link>
+                            </li>
+                            <li className="sidebar-link-item">
+                                <Link to="/tin-da-xem" className="sidebar-text-link" onClick={onClose}>
+                                    <FaHistory /> Tin đã xem
                                 </Link>
                             </li>
                         </ul>

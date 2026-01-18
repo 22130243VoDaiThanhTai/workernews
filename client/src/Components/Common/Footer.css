@@ -46,7 +46,7 @@
 }
 
 .nld-ft-nav a:hover {
-    color: #cc0000;
+    color: var(--text-link);
 }
 
 .nld-ft-divider {

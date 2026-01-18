@@ -1,11 +1,24 @@
+/* HomeVipNews.css - Đã hỗ trợ Dark Mode */
 
 .home-vip-section {
+    /* [LIGHT MODE] Nền xanh nhạt mặc định */
     background-color: #dcf4fc; 
     padding: 25px 0;
     margin-top: 30px;
+    
+    /* [LIGHT MODE] Viền xanh nhạt */
     border-top: 1px solid #cceeff;
     border-bottom: 1px solid #cceeff;
+    
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+/* [DARK MODE] Đổi nền và viền sang màu tối */
+[data-theme='dark'] .home-vip-section {
+    background-color: #252a34; /* Xám xanh đậm, khác biệt với nền đen chính */
+    border-top-color: #333;
+    border-bottom-color: #333;
 }
 
 .vip-container {
@@ -24,6 +37,10 @@
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(0, 91, 178, 0.15);
 }
+/* Dark mode cho đường kẻ dưới tiêu đề */
+[data-theme='dark'] .vip-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
 
 .vip-header-left {
     display: flex;
@@ -35,12 +52,13 @@
     font-family: "Merriweather", serif; 
     font-size: 22px;
     font-weight: 700;
-    color: #b27c03; 
+    color: #b27c03; /* Màu vàng đồng đặc trưng */
     text-transform: uppercase;
     display: flex;
     align-items: center;
     gap: 10px;
 }
+/* Dark mode giữ nguyên màu vàng đồng vì nó nổi trên nền tối */
 
 .vip-icon {
     font-size: 24px;
@@ -53,6 +71,10 @@
     margin-left: 38px;
     font-style: italic;
     line-height: 1.2;      
+}
+/* [DARK MODE] Đổi màu chữ chú thích */
+[data-theme='dark'] .vip-note {
+    color: #a0a0a0;
 }
  
 .btn-reg-vip {
@@ -103,15 +125,6 @@
     cursor: -webkit-grabbing;
 }
 
-.vip-list-scroll::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 10px;
-}
-
-.vip-list-scroll::-webkit-scrollbar-track {
-    background: transparent;
-}
-
 .vip-item {
     width: 260px;
     flex-shrink: 0;
@@ -158,7 +171,8 @@
 
 .vip-item-title a {
     text-decoration: none;
-    color: #333;
+    /* [LIGHT MODE] Màu chữ đen */
+    color: #333; 
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -167,8 +181,17 @@
     user-drag: none;
 }
 
+/* [DARK MODE] Đổi màu tiêu đề bài viết sang trắng xám */
+[data-theme='dark'] .vip-item-title a {
+    color: #e0e0e0;
+}
+
 .vip-item-title a:hover {
     color: #005689;
+}
+/* [DARK MODE] Hover đổi sang màu sáng hơn */
+[data-theme='dark'] .vip-item-title a:hover {
+    color: #66b2ff;
 }
 
 @media (max-width: 768px) {

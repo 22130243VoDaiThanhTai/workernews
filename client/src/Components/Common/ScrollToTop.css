@@ -1,10 +1,13 @@
+
 .scroll-to-top {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    color: #666;
+    
+    background-color: var(--bg-content);
+    border: 1px solid var(--border-color); 
+    color: var(--text-secondary);
+    
     width: 50px;
     height: 50px;
     border-radius: 4px;
@@ -26,9 +29,16 @@
 }
 
 .scroll-to-top:hover {
-    background-color: #f0f0f0;
+    background-color: var(--hover-bg); 
+    
     color: #3202d0; 
     border-color: #3202d0;
+}
+
+
+[data-theme='dark'] .scroll-to-top:hover {
+    color: #66b2ff; 
+    border-color: #66b2ff;
 }
 
 .scroll-to-top svg {

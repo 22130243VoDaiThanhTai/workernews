@@ -1,3 +1,4 @@
+/* HomePage.css - Đã hỗ trợ chế độ Sáng/Tối */
 
 .home_container {
     width: 1240px;
@@ -6,6 +7,10 @@
     padding: 0 15px;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    /* [QUAN TRỌNG] Đổi màu nền và màu chữ theo theme */
+    background-color: var(--bg-body); 
+    color: var(--text-primary);
 }
 
 .home_fflex {
@@ -24,7 +29,8 @@
     display: flex;
     gap: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #e5e5e5;
+    /* Thay màu viền cứng bằng biến */
+    border-bottom: 1px solid var(--border-color); 
 }
 
 .col-large {
@@ -47,7 +53,7 @@
 .bottom-item-col {
     width: 33.33%; 
     padding: 0 15px;
-    border-right: 1px solid #e5e5e5; 
+    border-right: 1px solid var(--border-color); /* Thay #e5e5e5 */
     display: flex;
     flex-direction: column;
 }
@@ -66,10 +72,12 @@
     width: 320px;
     padding-left: 20px;
     flex-shrink: 0; 
+    /* Nếu muốn sidebar có nền riêng trong dark mode thì mở comment dưới */
+    /* background-color: var(--bg-content); */
 }
 
 .sidebar-header {
-    border-bottom: 2px solid #ddd;
+    border-bottom: 2px solid var(--border-color); /* Thay #ddd */
     padding-bottom: 8px;
     margin-bottom: 15px;
 }
@@ -79,7 +87,7 @@
     font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #181717;
+    color: var(--text-primary); /* Thay #181717 */
 }
 
 .sidebar-content.scroll-box {
@@ -89,22 +97,24 @@
     padding-right: 5px; 
 }
 
+/* Tùy chỉnh thanh cuộn cho Sidebar */
 .sidebar-content.scroll-box::-webkit-scrollbar {
     width: 4px;
 }
 
 .sidebar-content.scroll-box::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: var(--hover-bg); /* Thay #f1f1f1 */
 }
 
 .sidebar-content.scroll-box::-webkit-scrollbar-thumb {
-    background: #ccc; 
+    background: var(--border-color); /* Thay #ccc */
     border-radius: 4px;
 }
 
 .sidebar-content.scroll-box::-webkit-scrollbar-thumb:hover {
-    background: #999; 
+    background: var(--text-secondary); /* Thay #999 */
 }
+
 .list-news-text {
     list-style: none;
     padding: 0;
@@ -116,7 +126,7 @@
 .list-news-text li {
     padding-bottom: 12px;
     margin-bottom: 12px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-color); /* Thay #f0f0f0 */
 }
 
 .list-news-text li:last-child {
@@ -125,7 +135,7 @@
 
 .list-news-text li a {
     font-size: 15px;
-    color: #333;
+    color: var(--text-primary); /* Thay #333 */
     line-height: 1.4;
     text-decoration: none;
     font-weight: 500;
@@ -133,12 +143,18 @@
 }
 
 .list-news-text li a:hover {
-    color: #005689;
+    color: var(--text-link); /* Thay #005689 */
 }
 
 
-a { color: #000; text-decoration: none; transition: 0.2s; }
-a:hover { color: #005689; }
+a { 
+    color: var(--text-primary); /* Thay #000 */
+    text-decoration: none; 
+    transition: 0.2s; 
+}
+a:hover { 
+    color: var(--text-link); 
+}
 
 .main-title {
     font-family: "Merriweather", serif;
@@ -147,6 +163,7 @@ a:hover { color: #005689; }
     line-height: 1.3;
     margin-top: 0;
     margin-bottom: 10px;
+    color: var(--text-primary); /* Đảm bảo tiêu đề đổi màu */
 }
 
 .main-thumb img {
@@ -159,10 +176,13 @@ a:hover { color: #005689; }
 
 .main-sapo {
     font-size: 15px;
-    color: #444;
+    color: var(--text-secondary); /* Thay #444 */
     line-height: 1.5;
 }
-.prefix { font-weight: bold; color: #555; }
+.prefix { 
+    font-weight: bold; 
+    color: var(--text-secondary); /* Thay #555 */
+}
 
 .sub-article { display: flex; flex-direction: column; }
 
@@ -180,6 +200,7 @@ a:hover { color: #005689; }
     font-weight: 700;
     margin: 0;
     line-height: 1.4;
+    color: var(--text-primary); 
 }
 
 .bottom-title {
@@ -188,11 +209,12 @@ a:hover { color: #005689; }
     font-weight: 700;
     line-height: 1.4;
     margin: 0 0 8px 0;
+    color: var(--text-primary); 
 }
 
 .bottom-sapo {
     font-size: 13px;
-    color: #555;
+    color: var(--text-secondary); /* Thay #555 */
     margin: 0;
     line-height: 1.5;
     display: -webkit-box;
@@ -222,21 +244,23 @@ a:hover { color: #005689; }
     .bottom-item-col {
         width: 100%;
         border-right: none;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--border-color); /* Thay #eee */
         padding: 0 0 15px 0 !important;
     }
 
     .home_top_section { border-bottom: none; }
 }
 
+/* Thanh Trending (Swiper Section) */
 .home__trending_bar {
     display: flex;
     align-items: center;
     padding: 15px 0;
     margin-bottom: 20px;
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid var(--border-color); /* Thay #e5e5e5 */
+    border-bottom: 1px solid var(--border-color);
     position: relative;
+    background-color: var(--bg-content); /* Đảm bảo nền đổi màu */
 }
 
 .home__trending_bar .label {
@@ -251,7 +275,7 @@ a:hover { color: #005689; }
     justify-content: center;
     width: 30px;
     height: 30px;
-    background-color: #d71920;
+    background-color: #d71920; /* Giữ màu đỏ thương hiệu */
     border-radius: 4px;
 }
 
@@ -267,7 +291,6 @@ a:hover { color: #005689; }
     position: relative;
     display: flex;
     align-items: center;
-
 }
 
 .home-treding-sw {
@@ -286,8 +309,8 @@ a:hover { color: #005689; }
 .box-category-link-title {
     display: inline-block;
     padding: 6px 12px;
-    background-color: #f5f5f5;
-    color: #333;
+    background-color: var(--hover-bg); /* Thay #f5f5f5 */
+    color: var(--text-primary); /* Thay #333 */
     font-size: 14px;
     font-weight: 500;
     border-radius: 4px;
@@ -298,8 +321,8 @@ a:hover { color: #005689; }
 }
 
 .box-category-link-title:hover {
-    background-color: #e0e0e0;
-    color: #d71920;
+    background-color: var(--border-color); /* Thay #e0e0e0 */
+    color: #d71920; /* Giữ hover đỏ */
 }
 
 .home-treding-sw-control {
@@ -310,7 +333,9 @@ a:hover { color: #005689; }
     display: flex;
     gap: 8px;
     z-index: 10;
-    background: #fff; 
+    /* Dùng biến nền để che chữ trôi qua phía dưới */
+
+    padding-left: 10px;
 }
 
 .swiper-prev, .swiper-next {
@@ -321,6 +346,10 @@ a:hover { color: #005689; }
     align-items: center;
     justify-content: center;
     transition: opacity 0.3s;
+    
+    /* XÓA BỎ NỀN VÀ VIỀN */
+    background-color: transparent !important;
+    border: none !important;
 }
 
 .swiper-prev.swiper-button-disabled,
@@ -329,9 +358,17 @@ a:hover { color: #005689; }
     cursor: default;
 }
 
+/* Đổi màu mũi tên SVG */
 .swiper-prev svg, .swiper-next svg {
     width: 100%;
     height: 100%;
+    fill: #ffffff; 
+    transition: fill 0.2s;
+}
+/* Dark Mode: Mũi tên chuyển sang màu trắng */
+[data-theme='dark'] .swiper-prev svg,
+[data-theme='dark'] .swiper-next svg {
+    fill: #fff;
 }
 
 @media (max-width: 768px) {
@@ -360,22 +397,22 @@ a:hover { color: #005689; }
 }
 
 .scroll-box::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: var(--hover-bg); /* Thay #f1f1f1 */
     border-radius: 3px;
 }
 
 .scroll-box::-webkit-scrollbar-thumb {
-    background: #ccc; 
+    background: var(--border-color); /* Thay #ccc */
     border-radius: 3px;
 }
 
 .scroll-box::-webkit-scrollbar-thumb:hover {
-    background: #999; 
+    background: var(--text-secondary); /* Thay #999 */
 }
 
 .banner-dhd {
     margin-top: 20px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border-color); /* Thay #eee */
     padding-top: 20px;
     text-align: center;
 }

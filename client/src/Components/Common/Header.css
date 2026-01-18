@@ -1,7 +1,8 @@
 .header {
-    background: #fff;
+    background: var(--bg-content); /* Thay #fff bằng biến nền */
     font-family: Arial, Helvetica, sans-serif;
     width: 100%;
+    transition: background-color 0.3s ease;
 }
 
 .container {
@@ -22,10 +23,10 @@
 }
 
 .header-top-bar {
-    background-color: #fff;
-    border-bottom: 1px solid #f0f0f0;
+    background-color: var(--bg-content);
+    border-bottom: 1px solid var(--border-color); 
     font-size: 12px;
-    color: #333;
+    color: var(--text-primary);
     padding: 6px 0;
 }
 
@@ -42,13 +43,13 @@
 }
 
 .sep {
-    color: #ccc;
+    color: var(--border-color);
     margin: 0 5px;
 }
 
 .highlight-link {
     text-decoration: underline;
-    color: #333;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
@@ -56,17 +57,17 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    color: #555;
+    color: var(--text-secondary); 
     text-decoration: none;
 }
 
 .top-link:hover {
-    color: #005689;
+    color: var(--text-link);
 }
 
 .icon-prefix {
     font-size: 13px;
-    color: #8aaec4;
+    color: #8aaec4; 
 }
 
 .social-icons {
@@ -112,18 +113,18 @@
     align-items: center;
 }
 
-.main-logo { height: 38px; width: auto; }
+.main-logo { height: 30px; width: auto; }
 .sub-logo { height: 30px; width: auto; }
 
 .brand-divider {
     width: 1px;
     height: 25px;
-    background: #e5e5e5;
+    background: var(--border-color);
 }
 
 .current-date {
     font-size: 13px;
-    color: #555;
+    color: var(--text-secondary); 
     white-space: nowrap;
 }
 
@@ -135,10 +136,10 @@
 
 .input-group {
     display: flex;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color); 
     border-radius: 20px;
     padding: 5px 15px;
-    background: #fff;
+    background: var(--bg-content);
 }
 
 .input-group input {
@@ -146,12 +147,14 @@
     outline: none;
     flex: 1;
     font-size: 14px;
+    background: transparent;
+    color: var(--text-primary);
 }
 
 .input-group button {
     background: none;
     border: none;
-    color: #888;
+    color: var(--text-secondary); 
     cursor: pointer;
 }
 
@@ -159,6 +162,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
 }
 
 .btn-vip {
@@ -168,6 +173,8 @@
     border-radius: 20px;
     font-size: 13px;
     font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 .btn-epaper {
@@ -177,6 +184,8 @@
     border-radius: 20px;
     font-size: 13px;
     font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 .header-nav-wrapper {
@@ -190,7 +199,6 @@
     left: 0;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    
 }
 
 @keyframes slideDown {
@@ -199,7 +207,7 @@
 }
 
 .header-nav {
-    background-color: #005689;
+    background-color: #005689; 
     height: 42px;
     width: 100%;
 }
@@ -222,7 +230,7 @@
     color: #fff !important;
     text-decoration: none;
     font-size: 12px;
-    font-weight: 700; /* Mặc định chữ đã hơi đậm */
+    font-weight: 700; 
     text-transform: uppercase;
     padding: 0 11px;
     height: 100%;
@@ -243,13 +251,11 @@
     cursor: pointer;
 }
 
-/* --- STYLE MỚI CHO ACTIVE (XANH ĐẬM + IN ĐẬM) --- */
 .nav-item:hover, 
 .nav-item.active {
-    background-color: #004269 !important; /* Xanh đậm hơn nền */
+    background-color: #004269 !important; 
 }
 
-/* Responsive */
 @media ( max-width : 1380px) {
     .nav-item {
         padding: 0 8px;
@@ -283,36 +289,36 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
 .menu-link {
     display: block;
     padding: 10px 20px;
     text-decoration: none;
-    color: #333;
+    color: var(--text-primary); 
     font-size: 14px;
     text-align: center;
     white-space: nowrap;
 }
 
 .menu-link:hover {
-    background: #f2f2f2;
+    background: var(--hover-bg); 
 }
 .user-name {
     font-weight: 600;
-    color: #333;
+    color: var(--text-primary); 
 }
-/* === USER DROPDOWN WRAPPER === */
+
 .user-dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* === MENU CONTAINER === */
 .user-menu {
     position: absolute;
     top: 130%;
     left: 50%;
     transform: translateX(-50%);
-    background: #fff;
+    background: var(--bg-content); 
     border-radius: 8px;
     min-width: 170px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
@@ -322,14 +328,12 @@
     z-index: 1000;
 }
 
-/* hover thì xổ menu */
 .user-dropdown:hover .user-menu {
     opacity: 1;
     visibility: visible;
     top: 150%;
 }
 
-/* === MENU ITEM (LOGIN / REGISTER / LOGOUT) === */
 .user-menu button,
 .user-menu a {
     width: 100%;
@@ -337,25 +341,21 @@
     border: none;
     background: none;
     cursor: pointer;
-
     display: flex;
-    justify-content: center;   /* CĂN GIỮA */
+    justify-content: center;   
     align-items: center;
-
     font-size: 14px;
-    color: #333;
+    color: var(--text-primary); 
     text-decoration: none;
-    white-space: nowrap;       /* KHÔNG BẺ DÒNG */
+    white-space: nowrap;      
     transition: background 0.2s ease;
 }
 
-/* hover chung 1 màu */
 .user-menu button:hover,
 .user-menu a:hover {
-    background: #f2f2f2;
+    background: var(--hover-bg); 
 }
 
-/* bo góc item đầu & cuối cho đẹp */
 .user-menu > :first-child:hover {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -363,4 +363,32 @@
 .user-menu > :last-child:hover {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+}
+
+.btn-theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color); 
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 15px;
+    color: var(--text-secondary); 
+    transition: all 0.3s ease;
+}
+
+.btn-theme-toggle:hover {
+    background-color: var(--hover-bg); 
+    color: var(--text-primary); 
+}
+
+[data-theme='dark'] .btn-theme-toggle {
+    border-color: #444;
+    color: #e0e0e0;
+}
+[data-theme='dark'] .btn-theme-toggle:hover {
+    background-color: #333;
 }

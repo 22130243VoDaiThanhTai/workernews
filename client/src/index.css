@@ -90,3 +90,42 @@
     .ds-noi-dung { flex-direction: column; }
     .Bao { border-right: none; padding-right: 0; }
 }
+
+
+/* 1. ĐỊNH NGHĨA MÀU CHO LIGHT MODE (Mặc định) */
+:root {
+  --bg-body: #f0f0f0;          /* Nền tổng thể */
+  --bg-content: #ffffff;       /* Nền các khối nội dung*/
+  --text-primary: #222222;     /* Chữ chính  */
+  --text-secondary: #555555;   /* Chữ phụ  */
+  --text-link: #005689;        /* Màu link gốc */
+  --border-color: #e5e5e5;     /* Màu viền */
+  --hover-bg: #f9f9f9;         /* Màu nền khi hover */
+  
+  /* Footer & Header */
+  --footer-bg: #ffffff;
+  --header-bg: #ffffff;
+}
+
+/* --- BIẾN MÀU DARK MODE --- */
+[data-theme='dark'] {
+  --bg-body: #121212;          /* Nền tổng thể  */
+  --bg-content: #1e1e1e;       /* Nền khối nội dung  */
+  --text-primary: #e4e6eb;     /* Chữ chính  */
+  --text-secondary: #b0b3b8;   /* Chữ phụ  */
+  --text-link: #66b2ff;        /* Màu link sáng hơn để dễ đọc */
+  --border-color: #3e4042;     /* Viền tối */
+  --hover-bg: #2d2d2d;         /* Hover tối */
+
+  /* Footer & Header */
+  --footer-bg: #1e1e1e;
+  --header-bg: #242526;
+}
+
+body {
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a { color: inherit; } /* Link kế thừa màu chữ của cha */
